@@ -1,0 +1,32 @@
+---
+title: 一些摄影作品
+lightbox: auto
+---
+
+## 广州
+
+![树林](photo/4.jpg){group="1" description="正午时分的中大南校区一角."}
+
+## 深圳
+
+::: {layout-nrow="1"}
+![红花](photo/Z30_0475.jpg){group="1" description="盛开于理学院旁的初春"}
+
+![图书馆](photo/Z30_0324.jpg){group="1" description="寒假时期的中大深圳图书馆,空无一人."}
+
+![天桥](photo/1.jpg){group="1" description="深圳市中心的天桥."}
+
+![围墙](photo/2.jpg){group="1" description="暑假时期的中大深圳围墙."}
+
+![烈日](photo/3.jpg){group="1" description="摄于正午时分,酷热."}
+
+![Tencent](photo/5.jpg){group="1" description="从公交站台拍摄的腾讯大厦logo"}
+:::
+
+## 梅州
+
+::: {layout-nrow="1"}
+![农田](photo/Z30_0780.jpg){group="1" description="梅州乡间雾气笼罩下的农田"}
+
+![石桥](photo/Z30_0791.jpg){group="1" description="夕阳下梅州一处无名石桥,大约100年前修建."}
+:::

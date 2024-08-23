@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: 906668d1-92a2-42f0-abab-4b394af9aeeb
+      url: 'https://www.sysukili.site'

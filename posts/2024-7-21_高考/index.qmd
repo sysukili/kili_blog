@@ -1,0 +1,17 @@
+---
+title: 简单分析下浙江高考数据
+author: 'Kili'
+date: "2024-07-15"
+categories: ["日常"]
+draft: ture
+toc: true
+cache: true
+---
+
+```{r}
+library(readxl)
+library(knitr)
+un=c('中山大学','武汉大学')
+zj <- read_excel("浙江高考.xls")
+kable(zj |> filter(学校名称%in%un) |> arrange(位次))
+```

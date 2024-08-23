@@ -1,0 +1,46 @@
+LB - FHR baseline (beats per minute)
+AC - # of accelerations per second
+FM - # of fetal movements per second
+UC - # of uterine contractions per second
+DL - # of light decelerations per second
+DS - # of severe decelerations per second
+DP - # of prolongued decelerations per second
+ASTV - percentage of time with abnormal short term variability
+MSTV - mean value of short term variability
+ALTV - percentage of time with abnormal long term variability
+MLTV - mean value of long term variability
+Width - width of FHR histogram
+Min - minimum of FHR histogram
+Max - Maximum of FHR histogram
+Nmax - # of histogram peaks
+Nzeros - # of histogram zeros
+Mode - histogram mode
+Mean - histogram mean
+Median - histogram median
+Variance - histogram variance
+Tendency - histogram tendency
+CLASS - FHR pattern class code (1 to 10) 
+NSP - fetal state class code (N=normal; S=suspect; P=pathologic)
+LB - FHR 基线（每分钟心跳次数）
+AC - # 每秒加速度
+FM - # 每秒胎动数
+UC - # 每秒子宫收缩次数
+DL - # 每秒的光减速度
+DS - # 每秒严重减速
+DP - # 每秒延长的减速度
+ASTV - 短期变异性异常的时间百分比
+MSTV - 短期变异性的平均值
+ALTV - 具有异常长期变异性的时间百分比
+MLTV - 长期变异性的平均值
+Width - FHR 直方图的宽度
+最小值 - FHR 直方图的最小值
+Max - FHR 直方图的最大值
+Nmax - 直方图峰的 #
+Nzeros - # 直方图零点
+Mode - 直方图模式
+Mean - 直方图平均值
+Median - 直方图 中位数
+Variance - 直方图方差
+Tendency - 直方图趋势
+CLASS - FHR 模式类代码（1 到 10）
+NSP - 胎儿状态类代码（N=正常;S=可疑;P=病理）

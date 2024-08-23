@@ -1,0 +1,15 @@
+---
+title: 用R创建动画
+author: 'Kili'
+date: "2024-07-15"
+categories: ["shiny"]
+toc: true
+cache: true
+draft: true
+---
+
+```{=html}
+<body>
+<p>这是第一个段落。</p>
+</body>
+```

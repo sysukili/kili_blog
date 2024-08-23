@@ -1,0 +1,18 @@
+---
+title: "Posts/帖子"
+listing:
+    contents: "**/index.qmd"
+    
+    type: default
+    image-placeholder: kili.jpg
+    fields: [image, date, title, subtitle, categories, author, reading-time] 
+    sort: "date desc"
+    categories: numbered
+    sort-ui: true
+    filter-ui: true
+    page-size: 10     
+page-layout: full
+title-block-banner: false
+comments: false
+toc: true
+---

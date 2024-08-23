@@ -1,0 +1,57 @@
+---
+title: "Kili"
+comments: false
+image: logo.png
+about:
+  template: trestles
+  links:
+      - icon: envelope
+        text: Email
+        href: sysukili@gmail.com    
+    # - icon: file-pdf
+    #   text: Resume
+    #   href: https://beatrizmilz.github.io/resume/index.pdf  
+      - icon: github
+        href: https://github.com/sysukili
+      - icon: bootstrap
+        text: bilibili
+        href: https://space.bilibili.com/349744659
+      - icon: eyeglasses
+        text: Zhihu
+        href: https://www.zhihu.com/people/yue-hui-xing-ming-66
+      - icon: book
+        text: recommend books for statistical learning
+        href: books.qmd
+---
+
+<center>
+
+::: {.btn-group role="group" aria-label="About"}
+<a href="about.html"> <button type="button" class="btn btn-primary me-md-2 btn-sm">English</button></a> <a href="about-zh.html"> <button type="button" class="btn btn-primary me-md-2 btn-sm">中文</button></a>
+:::
+
+</center>
+
+Statistical
+
+interest:
+
+-   data science,machine learning,deep learning
+
+-   esports,anime,photograph,detective story,SF
+
+-   R&Python
+
+::: {#hero-heading}
+## Education
+
+Sun Yat-Sen University,Canton \| Statistical \| 2021 - 2025
+:::
+
+Some shiny apps I created:
+
+-   <https://sysukili.shinyapps.io/ADNI/>
+
+-   <https://sysukili.shinyapps.io/cognitiontest/>
+
+-   <https://sysukili.shinyapps.io/visual/>

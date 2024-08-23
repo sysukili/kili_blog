@@ -1,0 +1,720 @@
+---
+title: 一份生物统计数据分析报告
+author: 'Kili'
+date: "2023-12-05"
+categories: ["R"]
+toc: true
+cache: true
+---
+
+```{r, include=FALSE}
+options(tinytex.verbose = TRUE)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(ggsci)
+library(nortest)
+library(GGally)
+library(outliers)
+library(showtext)
+font_add("myfont","C:/Windows/Fonts/simhei.ttf")
+font_families()
+
+showtext_auto()  #select your fonts automaticly
+```
+
+\newpage
+
+# 数据背景与分析目的
+
+Cardiotocography (CTG) measures your baby's heart rate. At the same time it also monitors the contractions in the womb (uterus). CTG is used both before birth (antenatally) and during labour, to monitor the baby for any signs of distress. By looking at various different aspects of the baby's heart rate, doctors and midwives can see how the baby is coping.
+
+2126 fetal cardiotocograms (CTGs) were automatically processed and the respective diagnostic features measured. The CTGs were also classified by three expert obstetricians and a consensus classification label assigned to each of them. Classification was both with respect to a morphologic pattern (A, B, C. ...) and to a fetal state (N, S, P). Therefore the dataset can be used either for 10-class or 3-class experiments.
+
+胎心宫缩图（CTG）测量宝宝的心率。同时，它还监测子宫（子宫）的收缩。CTG在出生前（产前）和分娩期间都用于监测婴儿是否有任何痛苦的迹象。通过观察婴儿心率的各个不同方面，医生和助产士可以看到婴儿是如何应对的。
+
+自动处理 2126 个胎儿胎心宫缩图 （CTG） 并测量相应的诊断特征。CTG还由三名产科专家进行分类，并为每个专家分配一个共识分类标签。分类既有形态学模式（A、B、C....）也有胎儿状态（N、S、P）。因此，该数据集可用于 10 类或 3 类实验。
+
+**Cardiotocography**数据集包括由专业产科医生分类的心电图上胎儿心率(FHR)和子宫收缩(UC)特征的测量结果。分析该数据集可帮助医生用CTG来诊断婴儿的状态。婴儿的心率。分娩期间婴儿的正常心率在每分钟 110 到 160 次之间。如果婴儿的心率持续偏低或偏高，这可能表明存在问题。婴儿心率的变异性或波动性。如果婴儿的心率在心跳之间略有变化，这是一个好兆头------这表明他们的大脑工作良好。如果他们的心率长时间保持非常相似，这可能表明存在问题。
+
+故本次数据分析报告选取LB,AC,FM,UC,CLASS,NSP这几个变量进行数据分析 \newpage
+
+# 数据描述
+
+```{r warning=FALSE}
+d=read.csv("data/CTG.csv",header=T)
+d <- as.tibble(d) 
+d <- select(d,LB,AC,FM,UC,CLASS,NSP)
+d$CLASS <- as.character(d$CLASS );d$NSP <- as.character(d$NSP )
+df <- tibble("变量名"=c("LB","AC","FM","UC","CLASS","NSP"),
+             "数据类型"=c(rep("连续型变量",times=4),"分类变量","分类变量"),
+             "含义"=c("fetal heart rate(FHR)每分钟心跳次数/bpm",
+                    "胎儿加速心跳/bpm",
+                    "每秒胎动数",
+                    "每秒子宫收缩次数",
+                    "FHR 模式类代码（1 到 10）",
+                    "胎儿状态类代码（1=正常;2=可疑;3=病理）"
+             ))
+          
+```
+
+\newpage
+
+## 数据预览
+
+```{r}
+d %>% head(7) %>% 
+kable( booktabs = TRUE,caption = "CTG数据") %>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "white", background = "#696969" )
+str(d)
+```
+
+\newpage
+
+## 各变量介绍
+
+```{r}
+df %>% 
+kable( booktabs = TRUE,caption = "CTG数据") %>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+```
+
+\newpage
+
+## 三种胎儿状态下LB、FM和UC的基础统计量
+
+```{r}
+bind_cols(
+  d |>
+    group_by(NSP) |>
+    summarise(count = n()),
+d %>% group_by(NSP) |>
+  summarise(across(
+    c("LB","AC","FM","UC"),
+    list( 
+      mean = \(x) mean(x, na.rm=TRUE), 
+      std = \(x) sd(x, na.rm=TRUE)
+      
+      )) ) %>% select(-NSP)) %>% 
+  knitr::kable(digits=2,caption="三种胎儿状态下LB、AC、FM和UC的基础统计量")%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+d %>% group_by(NSP) |>
+  summarise(across(
+    c("LB","AC","FM","UC"),
+    list( 
+      median = \(x) median(x, na.rm=TRUE),
+      IQR =\(x) IQR(x, na.rm=TRUE)
+      )))   %>% 
+  knitr::kable(digits=2)%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+d %>% group_by(NSP) |>
+  summarise(across(
+    c("LB","AC","FM","UC"),
+    list( 
+      min = \(x) min(x, na.rm=TRUE), 
+      max = \(x) max(x, na.rm=TRUE)
+      
+      )))   %>% 
+  knitr::kable(digits=2)%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+```
+
+|  从*表3*可观察到健康胎儿的心跳加速度均值明显更大，病理胎儿的宫缩次数均值明显更高
+
+\newpage
+
+## 十种FHR模式下LB、FM和UC变量的基础统计量
+
+```{r}
+bind_cols(
+  d |>
+    group_by(CLASS) |>
+    summarise(count = n()),
+d %>% group_by(CLASS) |>
+  summarise(across(
+    c("LB","AC","FM","UC"),
+    list( 
+      mean = \(x) mean(x, na.rm=TRUE), 
+      std = \(x) sd(x, na.rm=TRUE)
+      
+      )) ) %>% select(-CLASS)) %>% 
+  knitr::kable(digits=2,caption="十种FHR模式下LB、AC、FM和UC的变量的基础统计量")%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+d %>% group_by(CLASS) |>
+  summarise(across(
+    c("LB","AC","FM","UC"),
+    list( 
+      median = \(x) median(x, na.rm=TRUE),
+      IQR =\(x) IQR(x, na.rm=TRUE)
+      )))   %>% 
+  knitr::kable(digits=2)%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+d %>% group_by(CLASS) |>
+  summarise(across(
+    c("LB","AC","FM","UC"),
+    list( 
+      min = \(x) min(x, na.rm=TRUE), 
+      max = \(x) max(x, na.rm=TRUE)
+      
+      )))   %>% 
+  knitr::kable(digits=2)%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+```
+
+\newpage
+
+# 数据可视化
+
+## 散点图
+
+```{r message=FALSE}
+
+d %>% select(-CLASS) %>% ggpairs( columns=1:5, aes(color=NSP)) + 
+  ggtitle("散点图矩阵——NSP(GGally_ggpairs)")+
+  theme_bw() 
+```
+
+由图这几种向量并没有明显的相关性
+
+```{r}
+ggplot(d)+
+  geom_point(mapping=aes(x=LB,y=AC))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下LB与AC的关系",
+    tag = "散点图",
+    caption = "数据来源：Cardiotocography")
+
+ggplot(d)+
+  geom_point(mapping=aes(x=FM,y=UC))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下FM与UC的关系",
+    tag = "散点图",
+    caption = "数据来源：Cardiotocography")
+```
+
+\newpage
+
+## 箱形图
+
+注意到三种胎儿状态下正常胎儿心跳偏低，IQR更大
+
+```{r}
+ggplot(d,aes(NSP,LB))+
+  geom_boxplot(mapping=aes(fill=NSP))+
+  geom_jitter(aes(fill=NSP),width =0.2,shape = 21,size=0.2)+
+  theme_bw() + 
+  theme(panel.grid.major =element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_fill_npg()+
+  ggtitle("LB箱型图")
+
+ggplot(d,aes(CLASS,LB))+
+  geom_boxplot(mapping=aes(fill=CLASS))+
+  geom_jitter(aes(fill=CLASS),width =0.2,shape = 21,size=0.2)+
+  theme_bw() + 
+  theme(panel.grid.major =element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_fill_npg()+
+  ggtitle("LB箱型图")
+
+ggplot(d,aes(NSP,UC))+
+  geom_boxplot(mapping=aes(fill=NSP))+
+  geom_jitter(aes(fill=NSP),width =0.2,shape = 21,size=0.3)+
+  theme_bw() + 
+  theme(panel.grid.major =element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_fill_npg()+
+  ggtitle("UC箱型图")
+```
+
+\newpage
+
+## 热力图
+
+```{r}
+ggplot(d, aes(
+  x = NSP, y = CLASS,fill=LB)) +
+  geom_tile() +
+  scale_fill_viridis_c()
+```
+
+\newpage
+
+## 条形图
+
+由图可观察到5，8，9，10类心电图是胎儿危险的信号，推测与UC可能服从泊松分布
+
+```{r}
+ggplot(d)+
+  geom_bar(mapping=aes(x=AC,fill=AC))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下AC的分布",
+    tag = "条形图",
+    caption = "数据来源：Cardiotocography")+
+  scale_fill_npg()
+
+
+ggplot(d)+
+  geom_bar(mapping=aes(x=CLASS,fill=CLASS))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下CTG的CLASS分布",
+    tag = "条形图",
+    caption = "数据来源：Cardiotocography")+
+  scale_fill_npg()
+
+
+
+ggplot(d)+
+  geom_bar(mapping=aes(x=UC,fill=UC))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下UC的分布",
+    tag = "条形图",
+    caption = "数据来源：Cardiotocography")+
+  scale_fill_npg()
+```
+
+\newpage
+
+## 直方图
+
+由图可推测LB服从正态分布
+
+```{r}
+ggplot(d)+
+  geom_histogram(mapping=aes(x=LB))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下LB的分布",
+    tag = "直方图",
+    caption = "数据来源：Cardiotocography")
+
+ggplot(d)+
+  geom_histogram(mapping=aes(x=FM))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下LB的分布",
+    tag = "直方图",
+    caption = "数据来源：Cardiotocography")
+
+ggplot(d)+
+  geom_histogram(mapping=aes(x=LB,fill=NSP))+
+  labs(title = "三种胎儿状态下FM的分布",
+    tag = "直方图",
+    caption = "数据来源：Cardiotocography")+
+  scale_fill_npg()
+
+ggplot(d)+
+  geom_histogram(mapping=aes(x=LB))+
+  facet_wrap(~CLASS)+
+  labs(title = "十种心电图类型下LB的分布",
+    tag = "直方图",
+    caption = "数据来源：Cardiotocography")+
+  scale_fill_npg()
+```
+
+\newpage
+
+# 假设检验
+
+## LB变量的正态性检验
+
+### QQ图
+
+```{r}
+d %>% ggplot(aes(sample =LB )) +
+  geom_qq() + geom_qq_line()
+
+```
+
+### SW检验
+
+```{r}
+"normal";
+(d %>% filter(NSP=="1"))$LB %>% shapiro.test()
+
+"suspect";
+(d %>% filter(NSP=="2"))$LB %>% shapiro.test()
+
+"pathologic";
+(d %>% filter(NSP=="3"))$LB %>% shapiro.test()
+```
+
+### t检验
+
+```{r}
+"normal";
+(d %>% filter(NSP=="1"))$LB %>% t.test()
+
+"suspect";
+(d %>% filter(NSP=="2"))$LB %>% t.test()
+
+"pathologic";
+(d %>% filter(NSP=="3"))$LB %>% t.test()
+```
+
+### lillie检验
+
+```{r}
+d1=d %>% filter(NSP=="1")
+d2=d %>% filter(NSP=="2")
+d3=d %>% filter(NSP=="3")
+d1$LB %>% lillie.test()
+d2$LB %>% lillie.test()
+d3$LB %>% lillie.test()
+```
+
+由以上几种正态性检验均可在显著性水平\>0.001下说明LB即胎儿每分钟心跳数服从正态分布
+
+\newpage
+
+## 正常与病理胎儿状态LB均值齐性t检验
+
+```{r}
+t.test(d1$LB,d3$LB)
+```
+
+可见两者均值应该相等
+
+## 正常与病理胎儿状态LB方差齐性F检验
+
+```{r}
+var.test(d1$LB,d2$LB)
+```
+
+可见在显著性水平\>0.001下应该拒绝原假设，认为两者方差不等
+
+## 各变量间的相关性检验
+
+### pearson
+
+```{r}
+x=d$LB;y=d$AC;
+n=length(x)
+r=sum((x-mean(x))*(y-mean(y)))/sqrt(sum((x-mean(x))^2)*sum((y-mean(y))^2))
+pearson=r*sqrt(n-2/1-r^2)
+pearson
+n-2
+pt(pearson,n-2)
+```
+
+### spearman
+
+```{r}
+cor.test(d$LB,d$AC)
+```
+
+两者负相关
+
+##AC变量泊松分布pearson和似然比检验
+
+```{r}
+as.data.frame(table(d$AC))
+
+Ob=(head(as.data.frame(table(d$AC)),10))$Freq;n=sum(Ob);lambda=t(0:9)%*%Ob/n
+p=exp(-lambda)*lambda^(0:9)/factorial(0:9)
+E=p*n;Q=sum((E-Ob)^2/E);pvalue=pchisq(Q,8,low=F)
+Q
+pvalue
+```
+
+## 离群值检验
+
+```{r}
+chisq.out.test(d$LB)
+```
+
+\newpage
+
+# 结论与建议
+
+当妇科医生观看胎儿的CTG即心肺宫缩图时，胎儿心跳加速是胎儿健康的放心讯号,类型为5,8,9,10的心电图是危险信号，应该慎重诊断
+
+\newpage
+
+# 附录
+
+```{r eval=FALSE, warning=FALSE,echo=TRUE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(ggsci)
+library(nortest)
+library(GGally)
+library(outliers)
+
+d=read.csv("data/CTG.csv",header=T)
+d <- as.tibble(d) 
+d <- select(d,LB,AC,FM,UC,CLASS,NSP)
+d$CLASS <- as.character(d$CLASS );d$NSP <- as.character(d$NSP )
+df <- tibble("变量名"=c("LB","AC","FM","UC","CLASS","NSP"),
+             "数据类型"=c(rep("连续型变量",times=4),"分类变量","分类变量"),
+             "含义"=c("fetal heart rate(FHR)每分钟心跳次数/bpm",
+                    "胎儿加速心跳/bpm",
+                    "每秒胎动数",
+                    "每秒子宫收缩次数",
+                    "FHR 模式类代码（1 到 10）",
+                    "胎儿状态类代码（1=正常;2=可疑;3=病理）"
+             ))
+
+d %>% head(7) %>% 
+  kable( booktabs = TRUE,caption = "CTG数据") %>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "white", background = "#696969" )
+str(d)
+
+df %>% 
+  kable( booktabs = TRUE,caption = "CTG数据") %>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+bind_cols(
+  d |>
+    group_by(NSP) |>
+    summarise(count = n()),
+  d %>% group_by(NSP) |>
+    summarise(across(
+      c("LB","AC","FM","UC"),
+      list( 
+        mean = \(x) mean(x, na.rm=TRUE), 
+        std = \(x) sd(x, na.rm=TRUE)
+        
+      )) ) %>% select(-NSP)) %>% 
+  knitr::kable(digits=2,caption="三种胎儿状态下LB、AC、FM和UC的基础统计量")%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+d %>% group_by(NSP) |>
+  summarise(across(
+    c("LB","AC","FM","UC"),
+    list( 
+      median = \(x) median(x, na.rm=TRUE),
+      IQR =\(x) IQR(x, na.rm=TRUE)
+    )))   %>% 
+  knitr::kable(digits=2)%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+d %>% group_by(NSP) |>
+  summarise(across(
+    c("LB","AC","FM","UC"),
+    list( 
+      min = \(x) min(x, na.rm=TRUE), 
+      max = \(x) max(x, na.rm=TRUE)
+      
+    )))   %>% 
+  knitr::kable(digits=2)%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+bind_cols(
+  d |>
+    group_by(CLASS) |>
+    summarise(count = n()),
+  d %>% group_by(CLASS) |>
+    summarise(across(
+      c("LB","AC","FM","UC"),
+      list( 
+        mean = \(x) mean(x, na.rm=TRUE), 
+        std = \(x) sd(x, na.rm=TRUE)
+        
+      )) ) %>% select(-CLASS)) %>% 
+  knitr::kable(digits=2,caption="十种FHR模式下LB、AC、FM和UC的变量的基础统计量")%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+d %>% group_by(CLASS) |>
+  summarise(across(
+    c("LB","AC","FM","UC"),
+    list( 
+      median = \(x) median(x, na.rm=TRUE),
+      IQR =\(x) IQR(x, na.rm=TRUE)
+    )))   %>% 
+  knitr::kable(digits=2)%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+d %>% group_by(CLASS) |>
+  summarise(across(
+    c("LB","AC","FM","UC"),
+    list( 
+      min = \(x) min(x, na.rm=TRUE), 
+      max = \(x) max(x, na.rm=TRUE)
+      
+    )))   %>% 
+  knitr::kable(digits=2)%>% 
+  kable_styling(bootstrap_options = "bordered") %>% 
+  row_spec(0, color = "black", background = "#98F5FF" )
+
+d %>% select(-CLASS) %>% ggpairs( columns=1:5, aes(color=NSP)) + 
+  ggtitle("散点图矩阵——NSP(GGally_ggpairs)")+
+  theme_bw() 
+
+ggplot(d,aes(NSP,LB))+
+  geom_boxplot(mapping=aes(fill=NSP))+
+  geom_jitter(aes(fill=NSP),width =0.2,shape = 21,size=0.2)+
+  theme_bw() + 
+  theme(panel.grid.major =element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_fill_npg()+
+  ggtitle("LB箱型图")
+
+ggplot(d,aes(CLASS,LB))+
+  geom_boxplot(mapping=aes(fill=CLASS))+
+  geom_jitter(aes(fill=CLASS),width =0.2,shape = 21,size=0.2)+
+  theme_bw() + 
+  theme(panel.grid.major =element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_fill_npg()+
+  ggtitle("LB箱型图")
+
+ggplot(d,aes(NSP,UC))+
+  geom_boxplot(mapping=aes(fill=NSP))+
+  geom_jitter(aes(fill=NSP),width =0.2,shape = 21,size=0.3)+
+  theme_bw() + 
+  theme(panel.grid.major =element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_fill_npg()+
+  ggtitle("UC箱型图")
+
+
+ggplot(d, aes(
+  x = NSP, y = CLASS,fill=LB)) +
+  geom_tile() +
+  scale_fill_viridis_c()
+
+ggplot(d)+
+  geom_bar(mapping=aes(x=AC,fill=AC))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下AC的分布",
+       tag = "条形图",
+       caption = "数据来源：Cardiotocography")+
+  scale_fill_npg()
+
+
+ggplot(d)+
+  geom_bar(mapping=aes(x=CLASS,fill=CLASS))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下CTG的CLASS分布",
+       tag = "条形图",
+       caption = "数据来源：Cardiotocography")+
+  scale_fill_npg()
+
+
+
+ggplot(d)+
+  geom_bar(mapping=aes(x=UC,fill=UC))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下UC的分布",
+       tag = "条形图",
+       caption = "数据来源：Cardiotocography")+
+  scale_fill_npg()
+
+ggplot(d)+
+  geom_histogram(mapping=aes(x=LB))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下LB的分布",
+       tag = "直方图",
+       caption = "数据来源：Cardiotocography")
+
+ggplot(d)+
+  geom_histogram(mapping=aes(x=FM))+
+  facet_wrap(~NSP)+
+  labs(title = "三种胎儿状态下LB的分布",
+       tag = "直方图",
+       caption = "数据来源：Cardiotocography")
+
+ggplot(d)+
+  geom_histogram(mapping=aes(x=LB,fill=NSP))+
+  labs(title = "三种胎儿状态下FM的分布",
+       tag = "直方图",
+       caption = "数据来源：Cardiotocography")+
+  scale_fill_npg()
+
+ggplot(d)+
+  geom_histogram(mapping=aes(x=LB))+
+  facet_wrap(~CLASS)+
+  labs(title = "十种心电图类型下LB的分布",
+       tag = "直方图",
+       caption = "数据来源：Cardiotocography")+
+  scale_fill_npg()
+
+d %>% ggplot(aes(sample =LB )) +
+  geom_qq() + geom_qq_line()
+
+"normal";
+(d %>% filter(NSP=="1"))$LB %>% shapiro.test()
+
+"suspect";
+(d %>% filter(NSP=="2"))$LB %>% shapiro.test()
+
+"pathologic";
+(d %>% filter(NSP=="3"))$LB %>% shapiro.test()
+
+"normal";
+(d %>% filter(NSP=="1"))$LB %>% t.test()
+
+"suspect";
+(d %>% filter(NSP=="2"))$LB %>% t.test()
+
+"pathologic";
+(d %>% filter(NSP=="3"))$LB %>% t.test()
+
+d1=d %>% filter(NSP=="1")
+d2=d %>% filter(NSP=="2")
+d3=d %>% filter(NSP=="3")
+d1$LB %>% lillie.test()
+d2$LB %>% lillie.test()
+d3$LB %>% lillie.test()
+
+t.test(d1$LB,d3$LB)
+
+var.test(d1$LB,d2$LB)
+
+x=d$LB;y=d$AC;
+n=length(x)
+r=sum((x-mean(x))*(y-mean(y)))/sqrt(sum((x-mean(x))^2)*sum((y-mean(y))^2))
+pearson=r*sqrt(n-2/1-r^2)
+pearson
+n-2
+pt(pearson,n-2)
+
+
+cor.test(d$LB,d$AC)
+
+
+as.data.frame(table(d$AC))
+
+Ob=(head(as.data.frame(table(d$AC)),10))$Freq;n=sum(Ob);lambda=t(0:9)%*%Ob/n
+p=exp(-lambda)*lambda^(0:9)/factorial(0:9)
+E=p*n;Q=sum((E-Ob)^2/E);pvalue=pchisq(Q,8,low=F)
+Q
+pvalue
+
+chisq.out.test(d$LB)
+```

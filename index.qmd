@@ -1,0 +1,124 @@
+---
+title: "Just a blog"
+description: "Kili's personal blog"
+page-layout: full
+title-block-banner: false
+comments: false
+toc: false
+logo: logo.svg
+
+
+
+listing:
+  - id: posts
+#    image-placeholder: kili.jpg
+    contents: posts/**/*/index.qmd
+    type: grid
+    fields: [image, date, title, subtitle, categories, author, reading-time]  
+    sort: "date desc"
+    #categories: cloud
+    sort-ui: false
+    filter-ui: false
+    page-size: 3
+
+  - id: saying
+#    image-placeholder: kili.jpg
+    contents: saying/*.qmd
+    type: table
+    fields: [date, title, author, reading-time] 
+    sort: "date desc"
+    #categories: cloud
+    sort-ui: false
+    filter-ui: false
+
+about:
+  id: about
+  template: jolla
+  image: logo.svg
+#  image: bea.jpg
+  links:
+    - icon: envelope
+      text: Email
+      href: sysukili@gmail.com
+    # - icon: file-pdf
+    #   text: Resume
+    #   href: https://beatrizmilz.github.io/resume/index.pdf  
+    - icon: github
+      href: https://github.com/sysukili
+    - icon: bootstrap
+      text: bilibili
+      href: https://space.bilibili.com/349744659
+    - icon: eyeglasses
+      text: 知乎
+      href: https://www.zhihu.com/people/yue-hui-xing-ming-66
+    # - icon: newspaper
+    #   text: LinkedIn Newsletter
+    #   href: https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7129591797797797888      
+---
+
+```{=html}
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">
+  <div class="toast-header" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">
+    <strong class="me-auto" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">Kili's blog</strong>
+    <small data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">2024 <(￣︶￣)↗[GO!]</small>
+    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">
+      <span aria-hidden="true" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf"></span>
+    </button>
+  </div>
+  <div class="toast-body" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">
+    欢迎来到kili's bllog,不妨边听歌边翻翻帖子吧,如果你也喜欢R就更好了.
+  </div>
+</div>
+```
+```{=html}
+<center>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=65 src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=3583378&songtype=0"></iframe>
+
+</center>
+```
+::: {#about}
+:::
+
+<!-- ::: {#hero-heading} -->
+
+<!-- **Português:** Boas vindas à minha página pessoal! Aqui você pode encontrar meus textos do blog, palestras e outros projetos em que estou trabalhando. -->
+
+<!-- **English:** Welcome to my website! You can find here my blog posts, talks, and other projects I'm working on. -->
+
+<!-- ::: -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+## Posts/帖子
+
+::: {#posts}
+:::
+
+## 随笔
+
+::: {#saying}
+:::
+
+   
+<!-- 换行 -->
+
+```{=html}
+<pre>
+
+
+
+
+</pre>
+```
+```{=html}
+<figure data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">
+  <blockquote class="blockquote" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">
+    <p class="mb-0" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf" data-immersive-translate-paragraph="1">"在终极的分析中,一切历史都是历史,在抽象的意义下,一切科学都是数学,在理性的世界中,所有判断都是统计学."</p>
+  
+  </blockquote>
+  <figcaption class="blockquote-footer" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf" data-immersive-translate-paragraph="1">
+    C.R.Rao <cite title="  一名统计学家" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">一名统计学家</cite>
+  </figcaption>
+</figure>
+```

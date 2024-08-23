@@ -1,0 +1,24 @@
+/*-- scss:defaults --*/
+// Base document colors
+/*-- scss:defaults --*/
+$bs-blue: #282936!default;
+$bs-pagination-active-bg: $bs-blue !default;
+$bs-primary: $bs-blue !default;
+$bs-btn-hover-bg: $bs-blue !default;
+
+/*-- scss:rules --*/
+
+.navbar {
+  background-color: #4d4f68;
+}
+
+
+$body-bg: #282936;
+$body-color: white;
+$link-color: #87CEEB;
+
+
+// Code blocks
+$code-block-bg-alpha: -.8;
+
+// navbar

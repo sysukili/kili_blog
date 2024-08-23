@@ -1,0 +1,20 @@
+# options specified here will apply to all posts in this folder
+
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: auto
+code-fold: show
+code-link: true
+code-tools: true
+echo: fenced
+# Enable banner style title blocks
+title-block-banner: true
+author: 'Kili'
+date: last-modified
+# comments
+comments:
+  giscus:
+    language: zh-CN
+    repo: sysukili/kili_blog
+    category: Q&A
+    reactions-enabled: false

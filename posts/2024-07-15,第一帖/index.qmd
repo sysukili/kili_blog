@@ -1,0 +1,26 @@
+---
+title: 网站迁移,从blogdown到quarto-blog
+author: 'Kili'
+date: "2024-07-15"
+categories: ["中文","日常"]
+image: "images/91775050_p0.png"
+toc: true
+draft: false
+cache: true
+---
+
+跟随时代浪潮,我决定花两天将blog从blogdown迁移到以quarto包构建, 毕竟quarto-blog提供了更多主题,检索功能与导航栏等等,且可以方便地嵌入r与python 代码并运行.接下来我或许会在bilibili发布教程,敬请期待.
+
+Just a test!If you are seeing this post,wish you have a good day!I build up this website via [Quarto](https://quarto.org/).
+
+Good luck!
+
+```{=html}
+<pre>
+
+
+
+
+</pre>
+```
+![](images/91775050_p0.png)

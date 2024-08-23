@@ -1,0 +1,10 @@
+---
+title: julia尝试
+author: 'Kili'
+date: "2024-07-15"
+categories: ["julia"]
+toc: true
+cache: true
+draft: true
+engine: julia
+---

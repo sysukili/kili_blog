@@ -1,0 +1,57 @@
+---
+title: "Kili"
+comments: false
+image: logo.png
+about:
+  template: trestles
+  links:
+      - icon: envelope
+        text: 邮件
+        href: sysukili@gmail.com
+    # - icon: file-pdf
+    #   text: Resume
+    #   href: https://beatrizmilz.github.io/resume/index.pdf  
+      - icon: github
+        href: https://github.com/sysukili
+      - icon: bootstrap
+        text: bilibili
+        href: https://space.bilibili.com/349744659
+      - icon: book
+        text: 知乎
+        href: https://www.zhihu.com/people/yue-hui-xing-ming-66
+      - icon: book
+        text: 统计学习推荐书籍
+        href: books.qmd
+---
+
+<center>
+
+::: {.btn-group role="group" aria-label="About"}
+<a href="about.html"> <button type="button" class="btn btn-primary me-md-2 btn-sm">English</button></a> <a href="about-zh.html"> <button type="button" class="btn btn-primary me-md-2 btn-sm">中文</button></a>
+:::
+
+</center>
+
+统计er
+
+兴趣:
+
+-   数据科学,机器学习,深度学习🥰
+
+-   动漫,摄影,电子竞技,推理科幻🥰
+
+-   R&Python
+
+::: {#hero-heading}
+## Education
+
+中山大学,广州 \| 统计学学士 \| 2021 - 2025
+:::
+
+一些我用shiny创建的小程序:
+
+-   <https://sysukili.shinyapps.io/ADNI/>
+
+-   <https://sysukili.shinyapps.io/cognitiontest/>
+
+-   <https://sysukili.shinyapps.io/visual/>
