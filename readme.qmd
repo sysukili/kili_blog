@@ -1,0 +1,8 @@
+---
+title: "A personal blog mainly about statistics"
+format: gfm
+---
+
+Here is how it looks like,hope you can also enjoy it.
+
+![](images/clipboard-1926513503.png)
