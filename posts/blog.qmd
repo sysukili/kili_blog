@@ -1,0 +1,70 @@
+---
+title: 用quarto构建中文博客
+date: last-modified
+categories: ["blog","html","quato","scss"]
+draft: true
+format: 
+  html: default
+  typst: 
+    papersize: a4
+format-links:
+  - html
+  - format: typst
+    text: PDF
+    icon: file-pdf
+---
+
+# 介绍
+
+# 开始
+
+# 有趣的html小组件
+
+## 音乐播放器
+
+<center>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="300" height="65" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=359249253&amp;songtype=0">
+
+</iframe>
+
+</center>
+
+\`\`\`{{=html}}
+
+<center>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="300" height="65" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=359249253&amp;songtype=0">
+
+</iframe>
+
+</center>
+
+```         
+
+## toast
+
+```{=html}
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">
+  <div class="toast-header" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">
+    <strong class="me-auto" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">Kili's blog</strong>
+    <small data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">2024 <(￣︶￣)↗[GO!]</small>
+    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">
+      <span aria-hidden="true" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf"></span>
+    </button>
+  </div>
+  <div class="toast-body" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">
+    欢迎来到kili's bllog,不妨边听歌边翻翻帖子吧,如果你也喜欢R就更好了.
+  </div>
+</div>
+```
+
+代码:
+
+`{{=html}} <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">   <div class="toast-header" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">     <strong class="me-auto" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">Kili's blog</strong>     <small data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">2024 <(￣︶￣)↗[GO!]</small>     <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">       <span aria-hidden="true" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf"></span>     </button>   </div>   <div class="toast-body" data-immersive-translate-walked="ac1149f6-1abf-4532-8d04-a6fcaaa9becf">     欢迎来到kili's bllog,不妨边听歌边翻翻帖子吧,如果你也喜欢R就更好了.   </div> </div>`
+
+## button按钮
+
+# 基础的html与css知识学习
+
+\-[web文档](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)

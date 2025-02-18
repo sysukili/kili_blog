@@ -1,0 +1,29 @@
+---
+title: 用rvest爬虫[opgg](https://www.op.gg/)
+author: 'Kili'
+date: "2024-00-05"
+categories: ["rvest","爬虫","R"]
+toc: true
+draft: false
+cache: true
+bibliography: ref.bib
+nocite: |
+  @*
+---
+
+# 加载包&获取html
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(xml2)
+```
+
+```{r}
+html <- read_html("https://admission.sysu.edu.cn/zsw/lnfs.html")
+html
+```
+
+```{r}
+html |> html_elements("#sszygradeListPlace")|> html_table()
+```

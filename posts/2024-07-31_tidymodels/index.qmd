@@ -165,8 +165,6 @@ flights_rec[["var_info"]]$type
 
 ## 使用recipes
 
-
-
 ```{r}
 lr_mod <- 
   logistic_reg() %>% 
@@ -200,8 +198,6 @@ flights_fit %>%
 
 
 ```
-
-
 
 # 建立线性回归model
 
@@ -255,6 +251,120 @@ conf_int_pred <- predict(lm_fit,
 )
 conf_int_pred
 ```
+
+# 非线性
+
+先导入数据
+
+```{r}
+library(tidymodels)
+library(ISLR)
+
+Wage <- as_tibble(Wage)
+```
+
+## 多项式回归与step functions
+
+`step_poly(age, degree = 4)`将age进行4次多项式转化
+
+```{r}
+rec_poly <- recipe(wage ~ age, data = Wage) %>%
+  step_poly(age, degree = 4)
+
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")
+
+poly_wf <- workflow() %>%
+  add_model(lm_spec) %>%
+  add_recipe(rec_poly)
+
+poly_fit <- fit(poly_wf, data = Wage)
+poly_fit
+```
+
+```{r}
+tidy(poly_fit)
+```
+
+事实上step_poly（）并没有返回age、age^2、age^3和age^4，它返回的变量是正交多项式的基，这意味着每一列都是变量age、age ^2、age ^3和age ^4的线性组合。
+
+```{r}
+q <- poly(1:6, degree = 4, raw = FALSE)
+
+q
+
+poly(1:6, degree = 4, raw = TRUE)
+
+round(sum(q[,1]*q[,2]))
+```
+
+已经施密特正交化以减少共线性
+
+如果想用原数据:
+
+```
+rec_raw_poly <- recipe(wage ~ age, data = Wage) %>%
+  step_poly(age, degree = 4, options = list(raw = TRUE))
+
+raw_poly_wf <- workflow() %>%
+  add_model(lm_spec) %>%
+  add_recipe(rec_raw_poly)
+
+raw_poly_fit <- fit(raw_poly_wf, data = Wage)
+
+tidy(raw_poly_fit)
+```
+
+now,用`poly_fit`来拟合一些数据
+
+```{r}
+age_range <- tibble(age = seq(min(Wage$age), max(Wage$age)))
+
+regression_lines <- bind_cols(
+  augment(poly_fit, new_data = age_range),
+  predict(poly_fit, new_data = age_range, type = "conf_int")
+)
+regression_lines
+```
+
+
+```{r}
+#| fig-cap: 绿色为回归,蓝色为置信区间
+
+Wage %>%
+  ggplot(aes(age, wage)) +
+  geom_point(alpha = 0.2) +
+  geom_line(aes(y = .pred), color = "darkgreen",
+            data = regression_lines) +
+  geom_line(aes(y = .pred_lower), data = regression_lines, 
+            linetype = "dashed", color = "blue") +
+  geom_line(aes(y = .pred_upper), data = regression_lines, 
+            linetype = "dashed", color = "blue")
+```
+
+现在预测更大的年龄范围(18~100)
+
+```{r}
+wide_age_range <- tibble(age = seq(18, 100))
+
+regression_lines <- bind_cols(
+  augment(poly_fit, new_data = wide_age_range),
+  predict(poly_fit, new_data = wide_age_range, type = "conf_int")
+)
+
+Wage %>%
+  ggplot(aes(age, wage)) +
+  geom_point(alpha = 0.2) +
+  geom_line(aes(y = .pred), color = "darkgreen",
+            data = regression_lines) +
+  geom_line(aes(y = .pred_lower), data = regression_lines, 
+            linetype = "dashed", color = "blue") +
+  geom_line(aes(y = .pred_upper), data = regression_lines, 
+            linetype = "dashed", color = "blue")
+```
+
+边缘处的置信区间变得更大，方差过大,model预测效果不好.
 
 # 参考
 

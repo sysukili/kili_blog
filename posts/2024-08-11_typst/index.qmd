@@ -1,0 +1,14 @@
+---
+title: 从latex到typst
+author: 'Kili'
+date: "2024-08-11"
+categories: ["数学"]
+toc: true
+cache: true
+draft: true
+---
+
+
+$ frac(a^2, 2) $
+
+# why not work?

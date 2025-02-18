@@ -1,0 +1,63 @@
+---
+title: 统计计算
+date: last-modified
+categories: ["R","统计计算","高级R"]
+format: 
+  html: default
+  typst: 
+    papersize: a4
+format-links:
+  - html
+  - format: typst
+    text: PDF
+    icon: file-pdf
+---
+
+# 参考
+
+- [R语言高级编程](https://adv-r.hadley.nz/)
+
+- [R语言数据科学](https://r4ds.hadley.nz/)
+
+- [R语言数据可视化](https://ggplot2-book.org/)
+
+- [R包开发](https://r-pkgs.org/)
+
+# 1. 矩阵计算
+
+## 1.1 矩阵乘法
+
+
+```{r}
+a <- c(1, -1, 1, -1, -3, -3, 1, -3, 0) |> matrix(byrow = T, nrow = 3)
+c <- c(1, 1, -3 / 2, 0, 1, -1 / 2, 0, 0, 1) |> matrix(byrow = T, nrow = 3)
+q <- t(c) %*% a %*% c
+```
+
+## 1.2 矩阵求逆
+
+
+
+## 1.3 矩阵特征值
+
+```{r}
+eigen(q)
+```
+
+# 2. 高级R
+  
+
+```{r}
+library(tidyverse, quietly = true, warn.conflicts = false)
+library(knitr, quietly = true)
+library(rsthemes, quietly = true)
+library(conflicted, quietly = true)
+library(easystats, quietly = true)
+library(autoReg, quietly = true)
+library(lubridate, quietly = true)
+library(ggplot2, quietly = true)
+library(scales, quietly = true)
+library(ggthemr, quietly = true)
+conflicts_prefer(dplyr::filter)
+ggthemr(palette = "pale")
+```

@@ -1,13 +1,13 @@
 ---
 title: "Kili"
 comments: false
-image: logo.png
+image: 1.jpg
 about:
   template: trestles
+  image-shape: round
   links:
       - icon: envelope
-        text: Email
-        href: sysukili@gmail.com    
+        text: sysukili@gmail.com    
     # - icon: file-pdf
     #   text: Resume
     #   href: https://beatrizmilz.github.io/resume/index.pdf  
@@ -16,9 +16,6 @@ about:
       - icon: bootstrap
         text: bilibili
         href: https://space.bilibili.com/349744659
-      - icon: eyeglasses
-        text: Zhihu
-        href: https://www.zhihu.com/people/yue-hui-xing-ming-66
       - icon: book
         text: recommend books for statistical learning
         href: books.qmd
@@ -36,7 +33,7 @@ Statistical
 
 interest:
 
--   data science,machine learning,deep learning
+-   data science,machine learning,causal inference
 
 -   esports,anime,photograph,detective story,SF
 
@@ -45,7 +42,7 @@ interest:
 ::: {#hero-heading}
 ## Education
 
-Sun Yat-Sen University,Canton \| Statistical \| 2021 - 2025
+Sun Yat-Sen University,Canton China \| Statistical \| 2021 - 2025
 :::
 
 Some shiny apps I created:

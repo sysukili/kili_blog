@@ -1,0 +1,52 @@
+---
+title: 因果推断笔记1
+date: '2025-1-2'
+image: 2.jpg
+categories: ["R","因果推断","笔记"]
+---
+
+# Tower property
+
+给定随机变量或向量A,B,C我们有:(事实上整本书的推导将大量使用该定律)
+
+$$ 
+\begin{align}
+E(A) &= E\{E(A|B)\} ,\\
+ E(A|C) &= E\{E(A|B,C)|C\} \\
+\end{align}
+$$
+
+由条件概率公式$P(A|B)P(B)=f(A,B),P(A|B,C)P(B|C)=P(A,B|C)$我们有如下证明: $$
+\begin{align*}
+\text{proof: } E(A) &= \int_{-\infty }^{\infty }Af(A)  \,dA \\
+&= \int_{-\infty }^{\infty }A\left(\int_{-\infty}^{\infty} f(A,B) \,dB \right)  \,dA \\
+&= \iint Af(A|B)f(B)dAdB \\
+&= \int_{}^{} E(A|B)f(B) \,dB \\
+&= E\{E(A|B)\} \\
+E(A|C) &= \int_{-\infty }^{\infty }Af(A|C)  \,dA \\
+&= \int_{-\infty }^{\infty }A\left(\int_{-\infty}^{\infty} f(A,B|C) \,dB \right)  \,dA \\
+&= \iint Af(A|B,C)f(B|C)dAdB \\
+&= \int_{}^{} E(A|B,C)f(B|C) \,dB \\
+&= E\{E(A|B,C)|C\} \\
+\end{align*} 
+$$
+
+$$
+\begin{align}
+\end{align}
+$$
+
+给定随机变量A,随机变量或向量B,C,我们有 $$
+\begin{align}
+\end{align}
+$$
+
+$$
+\begin{align}
+\end{align}
+$$
+
+$$
+\begin{align}
+\end{align}
+$$

@@ -1,0 +1,12 @@
+---
+title: b站投稿转载视频
+date: "2024-8-24"
+---
+
+试了下在b站投稿转载视频,意外发现流程还挺麻烦的.首先得用[猫抓](https://github.com/xifangczy/cat-catch)抓取视频源,然后用*N_m3u8DL-CLI-SimpleG*这个软件下载把m3u8格式的视频合并为mp4格式,最后用剪映或whisper语音转字幕(双语可用沉浸式翻译).
+
+如此这般才得到下面的视频:
+
+```{=html}
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=112998710511783&bvid=BV1YMWaecE3d&cid=500001656881091&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+```

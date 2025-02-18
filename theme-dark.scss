@@ -12,6 +12,19 @@ $bs-btn-hover-bg: $bs-blue !default;
   background-color: #4d4f68;
 }
 
+div.quarto-categories{
+  color: #cbe9f1;
+  font-size: 0.5cm;
+}
+
+.content quarto-banner-title-block{
+  font-size: 0.5cm;
+}
+
+p pre code:not(.sourceCode), li pre code:not(.sourceCode), pre code:not(.sourceCode) {
+  background-color: #4d4f68; /* 代码块背景颜色 */
+}
+
 
 $body-bg: #282936;
 $body-color: white;
@@ -22,3 +35,11 @@ $link-color: #87CEEB;
 $code-block-bg-alpha: -.8;
 
 // navbar
+
+//font
+
+b, strong {
+  color: #94AA67; /* 粗体文字颜色 */
+  font-weight: bolder; /* 粗体文字加粗 */
+  font-size: 0.55cm;
+}

@@ -3,18 +3,18 @@ project:
   preview:
     port: 5000
 website:
+  page-navigation: true
   reader-mode: true
   title: "Just a BLOG" 
   repo-url: "https://github.com/sysukili/kili_blog"
   repo-actions:  source
-  page-navigation: true
   description: "This is Kili's personal Blog."
-  site-url: "https://sysukili.netlify.app"
+  site-url: "https://sysukili.site"
   favicon: logo.svg
   open-graph:
     image: logo.png
   page-footer:
-    left: "Website made with [Quarto](https://quarto.org/)   @kili 2023-2024"
+    left: "Website made with [Quarto](https://quarto.org/)   @kili 2023-2025"
     right:
       - icon: github
         href: https://github.com/sysukili
@@ -25,47 +25,27 @@ website:
     logo: logo.svg
     search: true
     right:
-      - text: About
-        menu:
-          - text: English
-            href: about.qmd
-          - text: 中文
-            href: about-zh.qmd
+      - text: About&CV
+        href: about-zh.qmd
       - text: Posts/帖子
         href: posts/index.qmd
-#        menu:
-#          - text: All posts
-#            href: posts/index.qmd
-#          - text: English
-#            href: posts/en.qmd
-#          - text: 中文
- #           href: posts/zh.qmd
-#      - text: Learning
-#        href: learning/index.qmd
-#      - text: Resume
-      - icon: camera
-        text: 摄影
-        href: photo.qmd
       - icon: github
         href: https://github.com/SYSUKili
-      - icon: bootstrap
-        text: bilibili
+      - text: bilibili
         href: https://space.bilibili.com/349744659
-      - icon: eyeglasses
-        text: 知乎
-        href: https://www.zhihu.com/people/yue-hui-xing-ming-66
-      - icon: book
-        text: books
+      - text: 推荐书籍
         href: books.qmd
       
       
 format:                                # html 设置
   html:
+    mainfont: LXGW Wenkai
+        #["Inconsolata","LXGW Wenkai"]
     lang: zh
     smooth-scroll: true
     date-format: iso
     theme:
-      light: [flatly, custom.scss]
+      light: [cosmo, styles.scss]
       dark: [darkly, theme-dark.scss]
     link-external-icon: true
     link-external-newwindow: true
@@ -74,6 +54,8 @@ format:                                # html 设置
     footnotes-hover: true
     toc: true
     code-link: true
+    cap-location: margin
+    
 
 editor: visual
 

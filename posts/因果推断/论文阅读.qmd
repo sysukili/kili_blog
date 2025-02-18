@@ -1,0 +1,21 @@
+---
+title: 精读三篇论文
+date: '2024-12-25'
+image: 2.jpg
+categories: ["R","因果推断"]
+bibliography: "references.bib"
+nocite: |
+  @*
+---
+
+term
+
+:   aaaaa
+
+    aaa
+
+    \tex
+
+:   \tex
+
+why[@1]

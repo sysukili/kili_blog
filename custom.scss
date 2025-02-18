@@ -1,69 +1,102 @@
 /*-- scss:defaults --*/
-$bs-blue: #87CEEB!default;
-$bs-pagination-active-bg: $bs-blue !default;
-$bs-primary: $bs-blue !default;
-$bs-btn-hover-bg: $bs-blue !default;
+/* 定义默认的 SCSS 变量 */
+$bs-blue: #003C75 !default; /* 定义蓝色变量 */
+$bs-pagination-active-bg: $bs-blue !default; /* 分页激活背景颜色 */
+$bs-primary: $bs-blue !default; /* 主颜色 */
+$bs-btn-hover-bg: $bs-blue !default; /* 按钮悬停背景颜色 */
 
 /*-- scss:rules --*/
+/* 定义具体的样式规则 */
+
+
 
 .navbar {
-  background-color: #3f72af;
-}
-
-.quarto-title-banner{
-  background-color: #0c2e42 ;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: $bs-blue;
-    border-color: $bs-blue;
-}
-
-
-
-.page-item.active .page-link {
-    z-index: 3;
-    color: #fff;
-    background-color: $bs-blue;
-    border-color: $bs-blue;
+  background-color: #AFD0F2; /* 导航栏背景颜色 */
+  color: white
 }
 
 .quarto-title-banner {
-    margin-bottom: 1em;
-    color: rgba(255,255,255,.7);
-    background: $bs-blue;
+  background-color: #467897; /* 标题横幅背景颜色 */
 }
 
+.btn-primary {
+  color: #fff; /* 按钮文字颜色 */
+  background-color: $bs-blue; /* 按钮背景颜色 */
+  border-color: $bs-blue; /* 按钮边框颜色 */
+}
+
+.page-item.active .page-link {
+  z-index: 3; /* 设置 z-index */
+  color: #fff; /* 分页链接文字颜色 */
+  background-color: $bs-blue; /* 分页链接背景颜色 */
+  border-color: $bs-blue; /* 分页链接边框颜色 */
+}
+
+.quarto-title-banner {
+  margin-bottom: 0.1em; /* 标题横幅底部外边距 */
+  color: #ffb7c5; /* 标题横幅文字颜色 */
+  background: #ffedd2; /* 标题横幅背景颜色 */
+
+}
 
 .page-link {
-      color: $bs-blue;
+  color: $bs-blue; /* 分页链接颜色 */
 }
-
 
 .page-link:hover {
-    z-index: 2;
-    color: #fff;
-    background-color: $bs-blue;
-    border-color: $bs-blue;
+  z-index: 2; /* 设置 z-index */
+  color: #fff; /* 分页链接悬停文字颜色 */
+  background-color: $bs-blue; /* 分页链接悬停背景颜色 */
+  border-color: $bs-blue; /* 分页链接悬停边框颜色 */
 }
 
-a{
-  color: $bs-blue;
+a {
+  color: $bs-blue; /* 链接颜色 */
 }
 
 b, strong {
-    color: $bs-blue;
-    font-weight: bolder;
+  color: $bs-blue; /* 粗体文字颜色 */
+  font-weight: bolder; /* 粗体文字加粗 */
+  font-size: 0.55cm;
 }
 
 div.quarto-post .listing-categories .listing-category {
-    color: $bs-blue;
-    border: solid 1px var(--bs-gray-400);
-    font-size: .8em;
+  color: #111111; /* 列表分类文字颜色 */
+  border: solid 1px var(--bs-gray-400); /* 列表分类边框颜色 */
+  font-size: 0.2cm; /* 列表分类字体大小 */
 }
 
+div.quarto-categories{
+  color: #002b36;
+  font-size: 0.5cm;
+}
 
 p pre code:not(.sourceCode), li pre code:not(.sourceCode), pre code:not(.sourceCode) {
-  background-color: #f0efff;
+  background-color: #f0efff; /* 代码块背景颜色 */
 }
+
+/*-- scss:defaults --*/
+
+// Base document colors
+$body-bg: #ffedd2;
+
+.content quarto-banner-title-block{
+  font-size: 0.5cm;
+}
+
+
+
+
+
+
+
+
+/*-- scss:rules --*/
+
+.layout-example {
+  background: $gray-700;
+}
+
+// font
+
+

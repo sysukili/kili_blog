@@ -1,7 +1,6 @@
 ---
 title: 随笔缘由
-toc: true
-cache: true
+date: "2024-8-14"
 ---
 
 > 世间好物不坚牢,彩云易散琉璃脆.

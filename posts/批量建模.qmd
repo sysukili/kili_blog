@@ -1,0 +1,94 @@
+---
+title: R语言批量建模--with tidymodels and statisfactory
+date: '2024-9-24'
+categories: ["R","tidymodels"]
+---
+
+# 特定变量分组批量建模
+
+# 按统计方法批量建模
+
+# 按变量批量建模
+
+最近在做因果推断作业时遇到一个有趣的问题:
+
+![](images/47241f8da1a2b0b51a1d42d18a60df5.jpg)
+
+即以re78为outcome,treat 为treatment,其他八个变量为covariate进行256次建立model,毫无疑问这需要函数编程与向量化.
+
+here's the data:[data/nsw_cps.dta](data/nsw_cps.dta)
+
+```{r}
+#| label: setup
+library(ggplot2)
+library(tidyverse)
+library(tidymodels)
+library(haven)
+d <- read_dta("data/nsw_cps.dta")
+
+d <- d |> mutate(across(\(col) length(unique(col))<3, as.factor))
+```
+
+看一眼
+
+```{r}
+glimpse(d)
+```
+
+先用`makeFormulae`函数创建256个公式对象,fomula对象是一个list
+
+```{r}
+library(statisfactory)
+fomula <- makeFormulae(re78 ~ age + education + black + hispanic + married + nodegree + re74 + re75, quad = F, ia = F)
+fomula <- map(fomula,update,.~.+treat)
+length(fomula)
+head(fomula)
+```
+
+接着创建256个工作流程([具体看tidymodels的官网](https://www.tmwr.org/workflows))
+
+```{r}
+lm_mod <- linear_reg()
+
+models <- 
+  workflow_set(preproc = fomula,models= list(lm_mod))
+
+head(models)
+```
+
+为每个公式创建具体模型拟合,保存至fit列,至此我们便做了256此回归,得到256个lm对象(储存在fit列)
+
+```{r}
+models <- 
+  models |> 
+  mutate(fit = map(info,~ fit(.x$workflow[[1]],d)))
+head(tidy(models$fit[[1]]))
+```
+
+```{r}
+fit <- models$fit 
+fit[[1]]
+tidy_fit <- map(fit,tidy)
+tidy_fit[[1]]
+```
+
+不妨再统计一下不同线性回归模型treat的系数与统计显著性
+
+```{r}
+q <- map(tidy_fit,~filter(.x,term=="treat1"))
+head(q)
+q1 <- q |> map_dbl(2)
+q2 <- q |> map_dbl(5)
+```
+
+```{r}
+dd <- tibble(coef=q1,p=q2)
+head(dd)
+
+dd |> summarise(positive=sum(coef>0),
+                negative=sum(coef<0),
+                posi_sign=sum(coef>0 & p<0.05),
+                posi_nosign=sum(coef>0 & p>0.05),
+                nega_sign=sum(coef<0 & p<0.05),
+                nega_nosign=sum(coef<0&p>0.05))
+```

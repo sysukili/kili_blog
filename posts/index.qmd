@@ -1,7 +1,11 @@
 ---
 title: "Posts/帖子"
 listing:
-    contents: "**/index.qmd"
+    id: causal-inference
+    contents: 
+      - "**/*/index.qmd"
+      - "*.qmd"
+      - "*/*.qmd"
     
     type: default
     image-placeholder: kili.jpg
@@ -12,7 +16,7 @@ listing:
     filter-ui: true
     page-size: 10     
 page-layout: full
-title-block-banner: false
+title-block-banner: true
 comments: false
 toc: true
 ---

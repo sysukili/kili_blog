@@ -1,3 +1,23 @@
+  library(tidyverse,quietly=true,warn.conflicts = false)
+  library(knitr,quietly=true)
+  library(rsthemes,quietly=true)
+  library(conflicted,quietly=true)
+  library(easystats,quietly=true)
+  library(autoReg,quietly=true)
+  library(lubridate,quietly=true)
+  library(ggplot2,quietly=true)
+  library(scales,quietly=true)
+  library(ggthemr,quietly=true)
+  conflicts_prefer(dplyr::filter)
+  ggthemr(palette = "pale")
+
+
+
+
+  set_theme_light("base16 Atelier Sulphurpool Light {rsthemes}")
+  set_theme_dark("base16 Dracula {rsthemes}")
+
+
 上传网站: quarto publish netlify
 
 netlify:令牌:
@@ -5,7 +25,22 @@ nfp_Agx7UMmMrm2s6fvDyw5RN4Td4fbmgYph60e9
 
 quarto check jupyter
 
+{{< include >}}
 {{< pagebreak >}}
 
 添加拓展:
+
+
+eval	Evaluate the code chunk (if false, just echos the code into the output).
+评估代码块（如果为false ，则仅将代码回显到输出中）。
+echo	 Include the source code in output
+在输出中包含源代码
+output	Include the results of executing the code in the output (true, false, or asis to indicate that the output is raw markdown and should not have any of Quarto’s standard enclosing markdown).
+在输出中包含执行代码的结果（ true 、 false或asis指示输出是原始 markdown 并且不应具有任何 Quarto 的标准封闭 markdown ）。
+warning	Include warnings in the output.
+在输出中包含警告。
+error	Include errors in the output (note that this implies that errors executing code will not halt processing of the document).
+在输出中包含错误（请注意，这意味着执行代码时出现错误不会停止文档的处理）。
+include	Catch all for preventing any output (code or results) from being included (e.g. include: false suppresses all output from the code block).
+catch all 用于防止包含任何输出（代码或结果）（例如include: false抑制代码块的所有输出）。
 

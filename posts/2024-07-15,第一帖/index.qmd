@@ -3,7 +3,6 @@ title: 网站迁移,从blogdown到quarto-blog
 author: 'Kili'
 date: "2024-07-15"
 categories: ["中文","日常"]
-image: "images/91775050_p0.png"
 toc: true
 draft: false
 cache: true
@@ -23,4 +22,4 @@ Good luck!
 
 </pre>
 ```
-![](images/91775050_p0.png)
+![](images/1.png)

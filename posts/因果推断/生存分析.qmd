@@ -1,0 +1,23 @@
+---
+title: "因果推断与生存分析"
+date: '2025-2-18'
+image: 2.jpg
+categories: ["R","因果推断","笔记","生存分析"]
+---
+
+本文主要参考Hernán MA, Robins JM的书籍[WHAT IF](https://miguelhernan.org/whatifbook),pdf版免费获取且仍在持续更新中.
+
+```{r}
+library(ellmer)
+
+chat = chat_deepseek(
+    system_prompt = "您是一位偏好使用tidyverse的R语言编程专家。",
+    model = "gpt-4o-mini",      # 或者o1-mini, gpt-4o等  
+    api_key = Sys.getenv("deepseek"),
+    api_args = list(temperature = 0.3))
+```
+
+
+# 介绍
+
+一般来说,因果推断问题中我们都是在估计treatment对outcome的effect,只不过在生存分析领域,outcome是实验开始到事件发生的时间长度,举例来说,我们会对停止吸烟于寿命的因果效应感兴趣(当然,已经有数不清的数据表明两者有强相关性,但正如Fisher那个经典的质疑,)

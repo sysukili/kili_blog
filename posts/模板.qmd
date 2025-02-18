@@ -1,0 +1,89 @@
+---
+title: "一些quarto模板与filter推荐"
+format: html
+---
+
+::: callout-tip
+## 一些小tips
+
+空格可用`&emsp`实现
+
+空行可用
+
+```         
+<pre>
+
+
+
+</pre>
+```
+
+实现
+:::
+
+# 自用的作业typst模板
+
+[demo](document/demo.pdf)&灵感来源:[一份posit的报告](https://github.com/posit-dev/bcorp-report)
+
+优点与目前局限:
+
+渲染快,带与封面图.但没有tex源码,未来可能会加入logo
+
+使用方法:
+
+在文件夹中添加[typst-show.typ](document/typst-show.typ)和[typst-template.typ](document/typst-template.typ)在quarto文件中插入以下代码
+
+```` yaml
+---
+title: "Causal inference"
+subtitle: 'hw6    &emsp;&emsp;  kili'
+lang: zh
+toc: true
+image: assets/images/12.jpg
+fig-width: 7
+fig-height: 3
+format:
+  typst:
+    pagesize: 'a4'
+    template-partials:
+      - typst-template.typ
+      - typst-show.typ
+keep-typ: true
+execute:
+  warning: false
+  error: false
+  echo: true
+
+```{=typst}
+#counter(page).update(1)
+```
+---
+````
+
+# 自用的作业latex模板
+
+demo:
+
+灵感来源:
+
+使用方法:
+
+在quarto文件中插入以下yaml代码
+
+``` yaml
+```
+
+# 中山大学论文word模板
+
+demo:
+
+目前局限:论文关键词需自行补充
+
+使用方法:
+
+在quarto文件中插入以下yaml代码
+
+``` yaml
+```
+
+# 四季 reveal.js

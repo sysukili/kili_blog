@@ -1,13 +1,13 @@
 ---
 title: "Kili"
 comments: false
-image: logo.png
+image: 1.jpg
 about:
   template: trestles
+  image-shape: round
   links:
       - icon: envelope
-        text: 邮件
-        href: sysukili@gmail.com
+        text: sysukili@gmail.com
     # - icon: file-pdf
     #   text: Resume
     #   href: https://beatrizmilz.github.io/resume/index.pdf  
@@ -16,9 +16,6 @@ about:
       - icon: bootstrap
         text: bilibili
         href: https://space.bilibili.com/349744659
-      - icon: book
-        text: 知乎
-        href: https://www.zhihu.com/people/yue-hui-xing-ming-66
       - icon: book
         text: 统计学习推荐书籍
         href: books.qmd
@@ -36,14 +33,14 @@ about:
 
 兴趣:
 
--   数据科学,机器学习,深度学习🥰
+-   数据科学,机器学习,因果推断
 
 -   动漫,摄影,电子竞技,推理科幻🥰
 
 -   R&Python
 
 ::: {#hero-heading}
-## Education
+## 教育经历
 
 中山大学,广州 \| 统计学学士 \| 2021 - 2025
 :::

@@ -2,7 +2,11 @@
 
 # freeze computational output
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
+author: "kili"
+image: 1.svg
 freeze: auto
+warnings: false
+cache: true
 code-fold: show
 code-link: true
 code-tools: true
@@ -17,3 +21,4 @@ comments:
     repo: sysukili/kili_blog
     category: Q&A
     reactions-enabled: false
+    

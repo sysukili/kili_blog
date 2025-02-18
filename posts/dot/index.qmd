@@ -1,0 +1,117 @@
+---
+title: 为什么R中一些函数参数前有点"."
+author: 'Kili'
+date: "2024-09-10"
+categories: ["R"]
+toc: true
+cache: true
+execute: 
+  eval: false
+---
+
+事实上,当我们查看许多函数的帮助文档时,会发现一些函数的参数前有点"."，如`mutate(.data,...)`。
+
+例如:
+
+
+```
+mutate(
+  .data,
+  ...,
+  .by = NULL,
+  .keep = c("all", "used", "unused", "none"),
+  .before = NULL,
+  .after = NULL
+)
+```
+
+你会发现mutate许多虚拟参数如data前有".",为什么?
+
+首先，.不是 dplyr 结构;它来自 Magrittr 提供的管道操作员。
+
+例如`6 |>  head(iris,.)`中的`.`代表其将容纳 |> 前的6.
+head(x, n = 6L, ...)
+
+那么` .data` 是做什么用的呢？不同于管道的".",其主要是为了消除数据变量和环境变量之间的歧义。请考虑以下示例：
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+
+# 定义 n.
+n <- 100
+
+# 使用 n
+data.frame(x = 1) %>% 
+  mutate(y = x / n) %>% 
+  pull()
+#> [1] 0.01
+
+# 当数据框已经包含 n 时，我们会得到错误的答案，因为数据框变量 n 在计算中具有优先权，即数据变量 n "掩盖"了环境变量 n。
+data.frame(x = 1, n = 2) %>% 
+  mutate(y = x / n) %>% 
+  pull()
+#> [1] 0.5
+
+
+# To disambiguate, we need to be explicit about where the variables come from 
+# by using the .data and .env pronouns.
+# 使用 .data 和 .env 代替 x 和 n
+data.frame(x = 1, n = 2) %>% 
+  mutate(y = .data$x / .env$n) %>% 
+  pull()
+#> [1] 0.01
+#> 正确答案
+```
+
+在这个例子中，我们使用了一个数据变量 n 和一个环境变量 n。当我们使用 mutate() 时，我们需要明确指定我们想要使用哪个变量。这就是 .data 和 .env 的作用。.data 代表数据变量，.env 代表环境变量。
+
+在为包编写函数时，数据变量和环境变量之间的这种区别非常重要，因为您不知道用户的工作区中将出现哪些变量。
+
+您可能已经注意到，只要您使用 .env$n，最后一个示例就可以很好地处理 x，因为数据变量在数据掩码函数中始终具有优先权。那么为什么还要使用 .data 呢？当您想要编写包装数据掩码函数的函数时，您需要使用 {{ （embrace） 运算符通过环境变量“隧道”数据变量。但是，当您执行此操作时，您的函数也会成为数据掩码函数。
+
+例如
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+
+my_function <- function(data, by, var) {
+  data %>% 
+    group_by({{ by }}) %>% 
+    summarise(avg = mean({{ var }}))
+}
+
+# my_function 是一个数据掩码函数，因此它可以接受数据变量和环境变量。
+#  使用
+my_function(iris, Species, Sepal.Width)
+#> `summarise()` ungrouping output (override with `.groups` argument)
+#> # A tibble: 3 x 2
+#>   Species      avg
+#>   <fct>      <dbl>
+#> 1 setosa      3.43
+#> 2 versicolor  2.77
+#> 3 virginica   2.97
+```
+
+这意味着想要包装您的函数的用户（例如在您的团队或组织内）必须了解数据屏蔽及其背后的理论。如果您想避免这种情况并创建一个 “常规” 函数怎么办？这是 .data 与 [[ 运算符的用武之地。
+
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+
+my_function <- function(data, by, var) {
+  data %>% 
+    group_by(.data[[by]]) %>% 
+    summarise(avg = mean(.data[[var]]))
+}
+
+# 此时my_function 就变成一个常规函数了,可以被正常包装
+my_function(iris, "Species", "Sepal.Width")
+#> `summarise()` ungrouping output (override with `.groups` argument)
+#> # A tibble: 3 x 2
+#>   Species      avg
+#>   <fct>      <dbl>
+#> 1 setosa      3.43
+#> 2 versicolor  2.77
+#> 3 virginica   2.97
+```
+

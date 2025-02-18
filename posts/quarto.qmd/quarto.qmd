@@ -1,0 +1,19 @@
+---
+titile: Quarto中文写作
+date: last-modified
+---
+
+[Quarto](https://quarto.org/docs/guide/)，一款基于pandoc的开源文档生成工具，支持多种格式输出，包括pdf、html、epub等。Quarto支持多种语言，包括R、python、julia等，可以直接在markdown文档中嵌入代码块，生成交互式文档。Quarto支持多种模板，可以自定义模板，生成自己的文档风格。Quarto支持多种插件，可以扩展Quarto的功能，生成更多样的文档。
+
+但是Quarto的中文需要花费更多尽力来设置以实现更好的效果，这篇文章将介绍如何在Quarto中写作中文。
+
+
+# markdown语言
+
+## 缩进实现
+
+# html
+
+# pdf
+
+quarto中文写作pdf有latex与typst两大种实现方式，在这里我更推荐typst，latex已经积重难返了，而typst是一个新的排版引擎，支持更多的排版效果，更加简单易用，且对中文的支持更加友好。

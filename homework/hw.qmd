@@ -1,0 +1,27 @@
+---
+title: "一些课程的homework"
+listing:
+    contents: 
+      - "因果推断/*.qmd"
+    type: table
+    fields: [date, title, subtitle] 
+    sort: "date desc"
+    page-size: 10     
+page-layout: full
+title-block-banner: false
+comments: false
+toc: true
+---
+
+## 因果推断
+
+参考用书:
+
+*A first course in casual inference by* 丁鹏
+
+[*Causal Inference in R*](https://www.r-causal.org/)
+
+::: {#causal-inference}
+:::
+
+## 统计计算

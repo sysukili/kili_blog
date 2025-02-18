@@ -6,11 +6,12 @@ freeze: auto
 code-fold: show
 code-link: true
 code-tools: true
+toc: true
+cache: true
 echo: fenced
 # Enable banner style title blocks
 title-block-banner: true
 author: 'Kili'
-date: last-modified
 # comments
 comments:
   giscus:
