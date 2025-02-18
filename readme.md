@@ -1,8 +1,6 @@
----
-title: "A personal blog mainly about statistics"
-date: "2025-2-18"
-format: gfm
----
+# A personal blog mainly about statistics
+
+2025-02-18
 
 Here is how it looks like,hope you can also enjoy it.
 

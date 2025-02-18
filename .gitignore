@@ -17,5 +17,5 @@ site_libs/
 .quarto/idx/
 index_cache
 index_files
-_extensions
-.obsidian
+_extensions/
+.obsidian/
