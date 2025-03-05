@@ -1,0 +1,18 @@
+---
+title: "Causal inference series Notes/因果推断系列笔记"
+image: 2.jpg
+listing:
+    id: causal-inference
+    contents: 
+      - "content/*.qmd"
+    type: table
+    image-placeholder: kili.jpg
+    fields: [date, title, description] 
+    sort: "date desc"
+page-layout: full
+title-block-banner: true
+comments: false
+toc: true
+---
+
+

@@ -6,4 +6,4 @@ format: gfm
 
 Here is how it looks like,hope you can also enjoy it.
 
-![](images/clipboard-1926513503.png)
+![the homepage of the blog](images/clipboard-1926513503.png)

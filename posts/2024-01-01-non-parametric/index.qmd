@@ -111,7 +111,8 @@ JonckheereTerpstraTest( alcohol~quality,data=d,alternative = c( "increasing"))
 
 ## 独立两样本比较的Wilcoxon秩和检验
 
-将红酒分成两组, 比较质量为3，4，5与6，7，8的红酒样本的酒精浓度中位数是否有显著性 差异 $$
+将红酒分成两组, 比较质量为3，4，5与6，7，8的红酒样本的酒精浓度中位数是否有显著性 差异
+$$
 \\H_0:\Delta=0
 $$
 
@@ -170,7 +171,9 @@ mu=mean(x);sigma=sum((x-mean(x))^2)/length(x)
 ks.test(x,"pnorm",mu,sigma)
 ```
 
-接下来比较一下先前分出的两组红酒的酒精浓度分布是否不同 $$
+接下来比较一下先前分出的两组红酒的酒精浓度分布是否不同 
+
+$$
 H_0:same\  pdf\ vs\ H_1:unsame
 $$
 
@@ -337,20 +340,22 @@ ggplot(d)+
 
 ## 样条光滑
 
-\$\$
+$$
 
-Y = \sum\_{j=1}\^p f_j(x_j) + \varepsilon
+Y = \sum_{j=1}^p f_j(x_j) + \varepsilon
 
-\$\$
+$$
 
-\$\$ \begin{align}
+$$ 
+
+\begin{align}
   \min_{f(\cdot)}
   \left\{
   \sum_i [y_i - f(x_i)]^2 + \lambda \int [f''(x)]^2 \,dx
   \right\}
 \end{align}
 
-\$\$
+$$
 
 对质量7的红酒酒精浓度与酒密度进行样条光滑回归
 
@@ -368,7 +373,7 @@ lines(spline(res$x, res$y), col="skyblue",lwd=2)
 
 ## Generalized Additive Model (GAM)线性可加模型
 
-将density作为因变量，自变量为fixed.acidity, citric.acid, residual.sugar与alcohol
+将`density`作为因变量，自变量为`fixed.acidity, citric.acid, residual.sugar与alcohol`
 
 ```{r}
 library(mgcv)

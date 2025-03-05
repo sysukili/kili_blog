@@ -166,37 +166,34 @@ flights_rec[["var_info"]]$type
 ## 使用recipes
 
 ```{r}
-lr_mod <- 
-  logistic_reg() %>% 
-  set_engine("glm")  # 设定引擎
+lr_mod <-
+  logistic_reg() %>%
+  set_engine("glm") # 设定引擎
 
-flights_wflow <- 
-  workflow() %>%           # 创建工作流
-  add_model(lr_mod) %>%    # 添加模型
-  add_recipe(flights_rec)   # 添加食谱
+flights_wflow <-
+  workflow() %>% # 创建工作流
+  add_model(lr_mod) %>% # 添加模型
+  add_recipe(flights_rec) # 添加食谱
 
-flights_wflow  # 查看工作流
+flights_wflow # 查看工作流
 ```
 
 ```{r}
-flights_fit <- 
-  flights_wflow %>% 
-  fit(data = train_data)  # 拟合模型
+flights_fit <-
+  flights_wflow %>%
+  fit(data = train_data) # 拟合模型
 
 
-flights_fit  # 查看模型
+flights_fit # 查看模型
 
 
-flights_fit %>% 
-  extract_fit_parsnip() %>% 
-  tidy()  # 查看模型参数
+flights_fit %>%
+  extract_fit_parsnip() %>%
+  tidy() # 查看模型参数
 
-flights_fit %>% 
-  extract_recipe() %>% 
-  tidy()   # 查看食谱
-
-
-
+flights_fit %>%
+  extract_recipe() %>%
+  tidy() # 查看食谱
 ```
 
 # 建立线性回归model
@@ -296,7 +293,7 @@ q
 
 poly(1:6, degree = 4, raw = TRUE)
 
-round(sum(q[,1]*q[,2]))
+round(sum(q[, 1] * q[, 2]))
 ```
 
 已经施密特正交化以减少共线性
@@ -335,12 +332,18 @@ regression_lines
 Wage %>%
   ggplot(aes(age, wage)) +
   geom_point(alpha = 0.2) +
-  geom_line(aes(y = .pred), color = "darkgreen",
-            data = regression_lines) +
-  geom_line(aes(y = .pred_lower), data = regression_lines, 
-            linetype = "dashed", color = "blue") +
-  geom_line(aes(y = .pred_upper), data = regression_lines, 
-            linetype = "dashed", color = "blue")
+  geom_line(aes(y = .pred),
+    color = "darkgreen",
+    data = regression_lines
+  ) +
+  geom_line(aes(y = .pred_lower),
+    data = regression_lines,
+    linetype = "dashed", color = "blue"
+  ) +
+  geom_line(aes(y = .pred_upper),
+    data = regression_lines,
+    linetype = "dashed", color = "blue"
+  )
 ```
 
 现在预测更大的年龄范围(18~100)
@@ -356,12 +359,18 @@ regression_lines <- bind_cols(
 Wage %>%
   ggplot(aes(age, wage)) +
   geom_point(alpha = 0.2) +
-  geom_line(aes(y = .pred), color = "darkgreen",
-            data = regression_lines) +
-  geom_line(aes(y = .pred_lower), data = regression_lines, 
-            linetype = "dashed", color = "blue") +
-  geom_line(aes(y = .pred_upper), data = regression_lines, 
-            linetype = "dashed", color = "blue")
+  geom_line(aes(y = .pred),
+    color = "darkgreen",
+    data = regression_lines
+  ) +
+  geom_line(aes(y = .pred_lower),
+    data = regression_lines,
+    linetype = "dashed", color = "blue"
+  ) +
+  geom_line(aes(y = .pred_upper),
+    data = regression_lines,
+    linetype = "dashed", color = "blue"
+  )
 ```
 
 边缘处的置信区间变得更大，方差过大,model预测效果不好.

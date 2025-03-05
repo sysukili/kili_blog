@@ -1,238 +1,244 @@
 /*-- scss:mixins --*/
-
+/* 定义混合宏，用于按钮的反转效果 */
 @mixin btn-inverse {
-  transition-delay: 0s;
-  transition-duration: 0.15s;
-  transition-property: color;
-  transition-timing-function: ease-in;
+  transition-delay: 0s; /* 过渡延迟 */
+  transition-duration: 0.15s; /* 过渡持续时间 */
+  transition-property: color; /* 过渡属性 */
+  transition-timing-function: ease-in; /* 过渡时间函数 */
 
   &:hover {
-    background-color: $theme-green;
-    color: rgb(250, 249, 240);
+    background-color: $theme-green; /* 悬停时的背景颜色 */
+    color: rgb(250, 249, 240); /* 悬停时的文字颜色 */
   }
 }
 
 /*-- scss:defaults --*/
-
-$theme-lightgreen: #F0F3EE;
-$theme-darkgreen: #17261e;
-$theme-green: #4a7862;
+/* 定义默认的 SCSS 变量 */
+$theme-lightgreen: #F0F3EE; /* 浅绿色主题颜色 */
+$theme-darkgreen: #17261e; /* 深绿色主题颜色 */
+$theme-green: #4a7862; /* 绿色主题颜色 */
 
 // colors ----------------------------------------------------------------------
-
-$body-bg: $theme-lightgreen;
-$body-color: $theme-darkgreen;
-$link-color: $theme-green;
-$link-hover-color: darken(saturate($link-color, 50%), 15%);
-
-$code-color: #4758AB;
+/* 定义颜色变量 */
+$body-bg: $theme-lightgreen; /* 页面背景颜色 */
+$body-color: $theme-darkgreen; /* 页面文字颜色 */
+$link-color: $theme-green; /* 链接颜色 */
+$link-hover-color: darken(saturate($link-color, 50%), 15%); /* 链接悬停颜色 */
+$code-color: #4758AB; /* 代码颜色 */
 
 // Fonts -----------------------------------------------------------------------
-
+/* 定义字体样式 */
 .sourceCode {
-  font-size: 1.1em;
+  font-size: 1.1em; /* 代码字体大小 */
 }
 
 // Navigation ------------------------------------------------------------------
-
-$navbar-bg: $theme-lightgreen;
-$navbar-fg: $theme-green;
+/* 定义导航栏样式 */
+$navbar-bg: #dce6ff; /* 导航栏背景颜色 */
+$navbar-fg: $theme-green; /* 导航栏前景颜色 */
 
 .menu-text {
-  display: block;
-  position: relative;
+  display: flex; /* 使用 Flexbox 布局 */
+  align-items: center; /* 垂直居中对齐 */
+  position: relative; /* 相对定位 */
 
   &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0.1em;
-    background-color: $theme-green;
-    transition: opacity 300ms, transform 300ms;
-    opacity: 1;
-    transform: scale(0);
-    transform-origin: center;
+    content: ''; /* 伪元素内容 */
+    position: absolute; /* 绝对定位 */
+    bottom: 0; /* 底部对齐 */
+    left: 0; /* 左对齐 */
+    width: 100%; /* 宽度为100% */
+    height: 0.1em; /* 高度为0.1em */
+    background-color: $theme-green; /* 背景颜色 */
+    transition: opacity 300ms, transform 300ms; /* 过渡效果 */
+    opacity: 1; /* 不透明度 */
+    transform: scale(0); /* 缩放 */
+    transform-origin: center; /* 缩放原点 */
   }
 
   &:hover::after,
   &:focus::after {
-    opacity: 1;
-    transform: scale(1);
+    opacity: 1; /* 悬停或聚焦时的不透明度 */
+    transform: scale(1); /* 悬停或聚焦时的缩放 */
   }
 }
 
 // code blocks -----------------------------------------------------------------
-
-$btn-code-copy-color-active: $theme-green;
+/* 定义代码块样式 */
+$btn-code-copy-color-active: $theme-green; /* 代码复制按钮激活颜色 */
 
 /*-- scss:rules --*/
+/* 定义具体的样式规则 */
+b, strong {
+  color: #003C75; /* 粗体文字颜色 */
+  font-weight: bolder; /* 粗体文字加粗 */
+  font-size: 0.5cm; /* 粗体文字字体大小 */
+}
+
+p pre code:not(.sourceCode), li pre code:not(.sourceCode), pre code:not(.sourceCode) {
+  background-color: #f0efff; /* 代码输出块背景颜色 */
+}
 
 h1,
 h2,
 h3 {
-  font-family: Fraunces;
+  font-family: Fraunces; /* 标题字体 */
 }
 
 .main {
-  padding: 2em;
-  align-items: center;
-  max-width: 1440px;
-  margin: auto;
-
-  font-size: 20px;
+  padding: 2em; /* 内边距 */
+  align-items: center; /* 居中对齐 */
+  max-width: 1440px; /* 最大宽度 */
+  margin: auto; /* 自动外边距 */
+  font-size: 20px; /* 字体大小 */
 
   h1 {
-    font-size: 80px;
+    font-size: 80px; /* 一级标题字体大小 */
   }
 
   h2 {
-    font-size: 16px;
-    text-transform: uppercase;
-    border-bottom: unset;
+    font-size: 16px; /* 二级标题字体大小 */
+    text-transform: uppercase; /* 转换为大写 */
+    border-bottom: unset; /* 取消底部边框 */
   }
 
   .left {
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin-left: 2rem; /* 左外边距 */
+    margin-right: 2rem; /* 右外边距 */
   }
 
   .right {
-    margin-right: 2rem;
-    text-align: right;
+    margin-right: 2rem; /* 右外边距 */
+    text-align: right; /* 右对齐 */
 
     img {
-      width: 70%;
-      margin: auto;
-      display: block;
+      width: 70%; /* 图片宽度 */
+      margin: auto; /* 自动外边距 */
+      display: block; /* 显示为块级元素 */
     }
   }
 }
 
 @media screen and (min-width: 60em) {
   .main {
-    display: flex
+    display: flex; /* 显示为弹性布局 */
   }
 
   .left {
-    width: 50%;
+    width: 50%; /* 左侧宽度 */
   }
 
   .right {
-    width: 50%;
+    width: 50%; /* 右侧宽度 */
   }
 }
 
 .page-item.active .page-link {
-  background-color: $theme-green;
-  border-color: $theme-green;
+  background-color: $theme-green; /* 分页链接激活背景颜色 */
+  border-color: $theme-green; /* 分页链接激活边框颜色 */
 }
 
 // blog ------------------------------------------------------------------------
-
+/* 定义博客样式 */
 div.quarto-post .listing-categories .listing-category,
 .quarto-title .quarto-categories .quarto-category {
-  color: $theme-green;
-  border: solid 1px $theme-green;
-
-  @include btn-inverse;
+  color: $theme-green; /* 列表分类文字颜色 */
+  border: solid 1px $theme-green; /* 列表分类边框颜色 */
+  @include btn-inverse; /* 引用 btn-inverse 混合宏 */
 }
 
 .quarto-listing-category-title {
-  color: $theme-green;
+  color: $theme-green; /* 列表分类标题颜色 */
 }
 
 div.quarto-post .body h3.listing-title {
-  font-family: Fraunces;
-  color: $theme-darkgreen;
+  font-family: Fraunces; /* 列表标题字体 */
+  color: $theme-darkgreen; /* 列表标题颜色 */
 }
 
 #title-block-header.quarto-title-block.default .quarto-title-meta-heading,
 .quarto-title-banner .page-columns .page-full,
 .quarto-title-banner {
-  margin-top: unset;
-  margin-bottom: unset;
+  margin-top: unset; /* 取消顶部外边距 */
+  margin-bottom: unset; /* 取消底部外边距 */
 }
 
 // project ---------------------------------------------------------------------
-
+/* 定义项目样式 */
 .quarto-listing-container-grid:has(.quarto-grid-item:hover) .quarto-grid-item:not(:hover) {
-  filter: brightness(95%);
+  filter: brightness(95%); /* 非悬停项目的亮度 */
 }
 
 .quarto-grid-item {
-  transition: all 0.25s;
+  transition: all 0.25s; /* 过渡效果 */
 
   &:hover {
-    border-color: $theme-green;
-    box-shadow: 0 12px 16px rgba($theme-green, 0.2);
+    border-color: $theme-green; /* 悬停时的边框颜色 */
+    box-shadow: 0 12px 16px rgba($theme-green, 0.2); /* 悬停时的阴影效果 */
   }
 
   p.card-img-top>img {
-    object-fit: contain;
-    background-color: lighten($theme-green, 50%);
+    object-fit: contain; /* 图片适应方式 */
+    background-color: lighten($theme-green, 50%); /* 图片背景颜色 */
   }
 }
 
 .quarto-grid-item .listing-categories .listing-category {
-  color: $theme-green;
-  border-color: $theme-green;
-
-  @include btn-inverse;
+  color: $theme-green; /* 列表分类文字颜色 */
+  border-color: $theme-green; /* 列表分类边框颜色 */
+  @include btn-inverse; /* 引用 btn-inverse 混合宏 */
 }
 
 // talk ------------------------------------------------------------------------
-
-
+/* 定义演讲样式 */
 article {
-  margin-bottom: 2em;
+  margin-bottom: 2em; /* 文章底部外边距 */
 }
 
 .flex {
-  display: block;
+  display: block; /* 显示为块级元素 */
 
   @media screen and (min-width: 40em) {
-    display: flex;
+    display: flex; /* 显示为弹性布局 */
   }
 
   figure {
-    width: 100%;
-    display: block;
-    margin: 0;
+    width: 100%; /* 宽度 */
+    display: block; /* 显示为块级元素 */
+    margin: 0; /* 外边距 */
 
     a .figure-img {
-      width: 100%;
+      width: 100%; /* 图片宽度 */
     }
 
     @media screen and (min-width: 40em) {
-      width: 30%;
-      margin-right: 1rem;
-      display: flex;
+      width: 30%; /* 宽度 */
+      margin-right: 1rem; /* 右外边距 */
+      display: flex; /* 显示为弹性布局 */
     }
   }
 
   .content {
-    width: 100%;
+    width: 100%; /* 宽度 */
 
     p {
-      margin-top: 0.25rem;
-      margin-bottom: 0.25rem;
+      margin-top: 0.25rem; /* 段落顶部外边距 */
+      margin-bottom: 0.25rem; /* 段落底部外边距 */
     }
 
     @media screen and (min-width: 40em) {
-      width: 70%;
+      width: 70%; /* 宽度 */
     }
 
     h1 {
-      font-size: 20px;
-      margin-top: 0.25rem;
-      margin-bottom: 0.25rem;
+      font-size: 20px; /* 一级标题字体大小 */
+      margin-top: 0.25rem; /* 一级标题顶部外边距 */
+      margin-bottom: 0.25rem; /* 一级标题底部外边距 */
     }
 
     footer {
-      margin-top: 16px;
-      display: inline-flex;
+      margin-top: 16px; /* 页脚顶部外边距 */
+      display: inline-flex; /* 显示为内联弹性布局 */
     }
   }
 }
@@ -243,29 +249,75 @@ article {
 div.quarto-about-jolla .about-link,
 .btn-links,
 .project-buttons>p>a {
-  border-style: solid;
-  padding-bottom: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  margin-right: 8px;
-  margin-bottom: 16px;
-  font-family: Commissioner;
-  text-transform: uppercase;
-  text-decoration-line: none;
-  display: inline-block;
-
-  @include btn-inverse;
+  border-style: solid; /* 边框样式 */
+  padding-bottom: 8px; /* 底部内边距 */
+  padding-left: 16px; /* 左内边距 */
+  padding-right: 16px; /* 右内边距 */
+  padding-top: 8px; /* 顶部内边距 */
+  margin-right: 8px; /* 右外边距 */
+  margin-bottom: 16px; /* 底部外边距 */
+  font-family: Commissioner; /* 字体 */
+  text-transform: uppercase; /* 转换为大写 */
+  text-decoration-line: none; /* 取消下划线 */
+  display: inline-block; /* 显示为内联块级元素 */
+  @include btn-inverse; /* 引用 btn-inverse 混合宏 */
 
   i {
-    margin-right: 8px;
+    margin-right: 8px; /* 图标右外边距 */
   }
 }
 
 .slide-deck {
-  width: 100%;
-  aspect-ratio: 1.5;
-
-  border-style: solid;
-  border-width: 1px;
+  width: 100%; /* 宽度 */
+  aspect-ratio: 1.5; /* 宽高比 */
+  border-style: solid; /* 边框样式 */
+  border-width: 1px; /* 边框宽度 */
 }
+
+//404
+.not-found-container {
+  text-align: center;
+  padding: 2em;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.not-found-image {
+  max-width: 400px;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+  color: #2E8B57; /* 海洋绿色 */
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  color: #2E8B57; /* 海洋绿色 */
+}
+
+.home-link {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background-color: #2E8B57; /* 海洋绿色 */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.home-link:hover {
+  background-color: #3CB371; /* 中海绿色 */
+}
+
+hr {
+  margin: 2em 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+

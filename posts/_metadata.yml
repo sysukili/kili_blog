@@ -13,6 +13,9 @@ code-tools: true
 echo: fenced
 # Enable banner style title blocks
 title-block-banner: true
+margin-footer: |
+    <font size=2.5>Contact me via [{{< fa brands bilibili >}}]{style="color: pink"}[bilibili](https://space.bilibili.com/349744659)</font> 
+
 
 # comments
 comments:

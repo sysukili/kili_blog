@@ -1,0 +1,66 @@
+---
+title: "因果推断与生存分析"
+date: '2025-2-18'
+image: 2.jpg
+categories: ["R","因果推断","笔记","生存分析"]
+abstract: |
+  本文主要参考Hernán MA, Robins JM的书籍[WHAT IF](https://miguelhernan.org/whatifbook),该教材pdf版免费获取且仍在持续更新中,本文示例数据:[nhefs](nhefs.csv).
+---
+
+```{r}
+# Install required packages if not already installed
+
+# Load necessary libraries
+library(ggplot2)
+
+# Create a dataset similar to the image
+data <- data.frame(
+  Patient = factor(c("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5", "Patient 6"),
+    levels = rev(c("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5", "Patient 6"))
+  ),
+  Entry = c(2000, 2000, 2002, 2002, 2003, 2001), # Year of entry
+  Exit = c(2008, 2005, 2007, 2007, 2004, 2005), # Year of follow-up end
+  Event = c(0, 1, 0, 0, 1, 1) # 1 = Event occurred, 0 = Censored
+)
+
+# Define the accrual and follow-up periods
+accrual_start <- 2000
+accrual_end <- 2002
+followup_end <- 2008
+
+# Create the plot
+ggplot(data, aes(y = Patient)) +
+  # Add follow-up lines
+  geom_segment(aes(x = Entry, xend = Exit, y = Patient, yend = Patient), color = "black") +
+  # Add entry points
+  geom_point(aes(x = Entry, y = Patient), shape = 16, size = 3) +
+  # Add censoring (open circles) and event markers (crosses)
+  geom_point(aes(x = Exit, y = Patient, shape = as.factor(Event)), size = 3) +
+  scale_shape_manual(values = c(1, 4), labels = c("Censored", "Event")) + # 1 = Open circle, 4 = Cross
+  # Add vertical lines for accrual and follow-up periods
+  geom_vline(xintercept = c(accrual_start, accrual_end, followup_end), linetype = "dashed", color = "red") +
+  # Labels and themes
+  labs(x = "Year of entry – calendar time", y = "", shape = "Outcome") +
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 12), legend.position = "top")
+```
+
+|  变量名  |                 解释                 |
+|:--------:|:------------------------------------:|
+|  death   |    是否在1992.12前死亡(1:是,0:否)    |
+|   time   | 存活时间,NA:Administrative censoring |
+|   qsmk   |   处理变量,是否停止吸烟(1:是,0:否)   |
+|   age    |                 年龄                 |
+| smokeyrs |                 烟龄                 |
+
+: NHEFS[^1]
+
+[^1]: 一项持续数十年的跟踪实验,[数据来源](https://miguelhernan.org/whatifbook)
+
+# 介绍
+
+一般来说,因果推断问题中我们都是在估计treatment对outcome的effect,只不过在生存分析领域,outcome是实验开始到事件发生的时间长度,举例来说,我们对停止吸烟于寿命的因果效应感兴趣(当然,已经有数不清的实验数据表明两者有强相关性,但正如Fisher那个经典的质疑,可能存在某种遗传或环境因素，既导致人们更容易吸烟，又增加了患肺癌的风险).
+
+当然,虽然名为生存分析,事件并不局限于死亡,其实"failure time analysis"这个名字我以为更恰当些,我们关注的是实验开始到发生事件的时间,事件可以是婚姻,癌症,感染甚至找到工作的时间.简化起见,本文只分析固定的treatment,vary的情况日后再说.
+
+# hazards 与 risks

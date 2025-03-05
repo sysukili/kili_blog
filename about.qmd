@@ -1,5 +1,5 @@
 ---
-title: "Kili"
+title: "Qu Chen"
 comments: false
 image: 1.jpg
 about:
@@ -26,6 +26,18 @@ about:
 ::: {.btn-group role="group" aria-label="About"}
 <a href="about.html"> <button type="button" class="btn btn-primary me-md-2 btn-sm">English</button></a> <a href="about-zh.html"> <button type="button" class="btn btn-primary me-md-2 btn-sm">中文</button></a>
 :::
+
+```{=html}
+<div class="project-buttons">
+<a href="https://github.com/EmilHvitfeldt/roundabouts">
+  {{< fa file github >}} github
+</a>
+</div>
+<br>
+```
+
+
+
 
 </center>
 

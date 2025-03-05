@@ -1,6 +1,6 @@
 ---
 title: "Just a blog"
-description: "Kili's personal blog"
+description: "Qu Chen's personal blog"
 page-layout: full
 title-block-banner: false
 comments: false
@@ -13,8 +13,11 @@ listing:
   - id: posts
     image-placeholder: kili.jpg
     contents: 
-            - posts/**/*/index.qmd
+            - posts/**/*/*.qmd
             - posts/!(index).qmd
+            - posts/**/*.qmd
+            - posts/因果推断/!(contnet)/
+            - posts/*/!(index).qmd
 
     type: grid
     fields: [image, date, title, subtitle, categories, author, reading-time]  
@@ -61,52 +64,61 @@ about:
     #   href: https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7129591797797797888      
 ---
 
-:::: {.columns}
-
+:::::: columns
 ::: {.column width="50%"}
-
 ```{=html}
 <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-immersive-translate-walked="e7bd2f85-e9a7-4efe-a854-07b47face184">
   <div class="toast-header" data-immersive-translate-walked="e7bd2f85-e9a7-4efe-a854-07b47face184">
     <strong class="me-auto" data-immersive-translate-walked="e7bd2f85-e9a7-4efe-a854-07b47face184" data-immersive-translate-paragraph="1">Kili's blog</strong>
-    <small data-immersive-translate-walked="e7bd2f85-e9a7-4efe-a854-07b47face184">2024 <(￣︶￣)↗\[GO!\]</small>
+    <small data-immersive-translate-walked="e7bd2f85-e9a7-4efe-a854-07b47face184">2025 <(￣︶￣)↗[GO!]</small>
     <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close" data-immersive-translate-walked="e7bd2f85-e9a7-4efe-a854-07b47face184">
       <span aria-hidden="true" data-immersive-translate-walked="e7bd2f85-e9a7-4efe-a854-07b47face184"></span>
     </button>
   </div>
   <div class="toast-body" data-immersive-translate-walked="e7bd2f85-e9a7-4efe-a854-07b47face184" data-immersive-translate-paragraph="1">
-    欢迎来到kili's bllog,不妨边听歌边翻翻帖子吧, 主要关于statistic,R&causal inference,也有一些随笔与分享.
+    欢迎来到kili's bllog,不妨边听歌边翻翻帖子吧, 主要关于统计,R&因果推断,也有一些随笔与分享. 
   </div>
 </div>
 ```
-
-
 :::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
+::: panel-tabset
+## a song
+
 ```{=html}
 
 
-<!-- 炽焰天穹 359249253   胆大党   522977732-->
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="300" height="65" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=108963501&amp;songtype=0">
+<!-- 炽焰天穹 359249253   胆大党   522977732  run,run,run 108963501-->
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="400" height="65" src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=408332499&amp;songtype=0">
 
 </iframe>
 ```
 
+## 什么是统计
 
-> "在终极的分析中,一切历史都是历史,在抽象的意义下,一切科学都是数学,在理性的世界中,所有判断都是统计学."  &emsp;&emsp;&emsp;&emsp;&emsp;——*C.R.Rao*
+> "在终极的分析中,一切历史都是历史,在抽象的意义下,一切科学都是数学,在理性的世界中,所有判断都是统计学."      ——*C.R.Rao*
+
+> 所谓统计学就是在测量上帝的旨意啊.
+
+## 研究兴趣
+
+- 因果推断
+- 高维数据
+- 生物统计
+- 计量经济学
+- R语言
+- 生存分析
+
+## Contact me
+
+如果你想尽快联系到我,最佳方法是通过[{{< fa brands bilibili >}}]{style="color:pink"}[bilibili](https://space.bilibili.com/349744659) (日活用户是也)
 
 :::
-
 ::::
-
-
-
-
-
-
-
+::::::
 
 <!-- ::: {#hero-heading} -->
 
@@ -134,12 +146,14 @@ about:
 
 <!-- 添加空白行 -->
 
+```{=html}
 <pre>
 
 
 
 
 </pre>
+```
 
 ::: {#about}
 :::

@@ -1,0 +1,42 @@
+- subtitle: '概率论'
+  title: "基础概率论与学习指导书"
+  author: '李贤平'
+  description: '6'
+  rank: 1
+- subtitle: '概率论'
+  title: "Applied Probability"
+  author: 'Valérie Girardin & Nikolaos Limnios'
+  description: '8 十分好读的初高级衔接教材'
+  rank: 1
+- subtitle: '数理统计'
+  title: "Applied Probability"
+  author: 'Valérie Girardin & Nikolaos Limnios'
+  description: '8 十分好读的初高级衔接教材'
+  rank: 2
+- subtitle: '因果推断'
+  title: "A First course in Causal Inference"
+  author: 'Valérie Girardin & Nikolaos Limnios'
+  description: '9 严谨且全面的因果推断教材,但有些难读,听说作者会在未来出第二版'
+  rank: 9
+- subtitle: '因果推断'
+  title: "Applied Probability"
+  author: 'Valérie Girardin & Nikolaos Limnios'
+  description: '8 十分好读的初高级衔接教材'
+  rank: 9
+- subtitle: '因果推断'
+  title: "Applied Probability"
+  author: 'Valérie Girardin & Nikolaos Limnios'
+  description: '8 十分好读的初高级衔接教材'
+  rank: 9
+- subtitle: 'R 语言'
+  title: "数学分析简明教程"
+  author: '李东风 '
+  description: '8 目前学R语言最好的中文教材'
+  rank: 100
+- subtitle: 'R 语言'
+  title: "数学分析简明教程"
+  author: 'Hadley Wickham'
+  description: '10 目前学R语言最好的四本教材'
+  rank: 100
+  
+  

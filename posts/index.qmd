@@ -6,10 +6,9 @@ listing:
       - "**/*/index.qmd"
       - "*.qmd"
       - "*/*.qmd"
-    
     type: default
     image-placeholder: kili.jpg
-    fields: [image, date, title, subtitle, categories, author, reading-time] 
+    fields: [image, date, title, subtitle, categories, author] 
     sort: "date desc"
     categories: numbered
     sort-ui: true

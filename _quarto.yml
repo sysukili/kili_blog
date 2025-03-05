@@ -8,8 +8,8 @@ website:
   title: "Just a BLOG" 
   repo-url: "https://github.com/sysukili/kili_blog"
   repo-actions:  source
-  description: "This is Kili's personal Blog."
-  site-url: "https://sysukili.site"
+  description: "This is Qu Chen's personal Blog."
+  site-url: "https://www.sysukili.site"
   favicon: logo.svg
   open-graph:
     image: logo.png
@@ -39,9 +39,10 @@ website:
       
 format:                                # html 设置
   html:
+    google-analytics: "G-C73GX8KWT9"
     mainfont: LXGW Wenkai
         #["Inconsolata","LXGW Wenkai"]
-    lang: zh
+    lang: en
     smooth-scroll: true
     date-format: iso
     theme:
@@ -54,8 +55,9 @@ format:                                # html 设置
     footnotes-hover: true
     toc: true
     code-link: true
+    linkcolor: skyblue
     cap-location: margin
-    
+
 
 editor: visual
 

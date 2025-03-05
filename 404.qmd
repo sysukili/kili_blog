@@ -1,5 +1,4 @@
-
-:::{layout-ncol=2}
+::: {layout-ncol="2"}
 ```{=html}
 <div class="not-found-container">
   <h1>404 - 页面未找到</h1>

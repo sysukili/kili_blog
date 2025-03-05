@@ -13,6 +13,8 @@ Encoding: UTF-8
 RnwWeave: knitr
 LaTeX: XeLaTeX
 
+UseNativePipeOperator: Yes
+
 PythonType: system
 PythonVersion: 3.12.5
 PythonPath: C:/Users/10156/AppData/Local/Programs/Python/Python312/python.exe

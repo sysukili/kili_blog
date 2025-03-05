@@ -6,7 +6,7 @@
       {
         "id": "df27061a7f3fd78a",
         "type": "tabs",
-        "dimension": 50.27322404371585,
+        "dimension": 54.57559681697612,
         "children": [
           {
             "id": "5e2fc4ac1d7578c2",
@@ -56,7 +56,7 @@
       {
         "id": "5e06c09cebba73ee",
         "type": "tabs",
-        "dimension": 49.72677595628415,
+        "dimension": 45.42440318302387,
         "children": [
           {
             "id": "b280fd0d94f46062",
@@ -201,9 +201,35 @@
               "icon": "lucide-list",
               "title": "连接Rstuido与Github 的大纲"
             }
+          },
+          {
+            "id": "2fd15a3ba1e190f8",
+            "type": "leaf",
+            "state": {
+              "type": "r-environment-view",
+              "state": {},
+              "icon": "table",
+              "title": "R Environment"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
+      },
+      {
+        "id": "56027fea0995463a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "299c5d1a23aac45c",
+            "type": "leaf",
+            "state": {
+              "type": "r-help-view",
+              "state": {},
+              "icon": "info",
+              "title": "R Help"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
@@ -224,6 +250,11 @@
   },
   "active": "19b4b579578aa9d1",
   "lastOpenFiles": [
+    "exports/__Rstuido_Github_qmd/__Rstuido_Github_qmd_quarto.qmd",
+    "exports/__Rstuido_Github_qmd",
+    "exports",
+    "posts/因果推断/笔记0.qmd",
+    "posts/连接Rstuido与Github.qmd",
     "readme_files/mediabag",
     "readme_files",
     "readme.md",
@@ -234,10 +265,6 @@
     "images/clipboard-1926513503.png",
     "readme.qmd",
     "posts/因果推断/生存分析.qmd",
-    "posts/连接Rstuido与Github 1.qmd",
-    "posts/连接Rstuido与Github.qmd",
-    "posts/因果推断/笔记1.qmd",
-    "posts/批量建模.qmd",
     "posts/images/Pasted image 20250217062330.png",
     "posts/images/Pasted image 20250217060308.png",
     "Pasted image 20250217060308.png",
